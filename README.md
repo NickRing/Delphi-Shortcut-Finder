@@ -21,4 +21,5 @@ I would like to thank Andreas Hausladen for telling me where [DDevExtensions](ht
 
 #### Dependencies
 
-The only dependencies is on [Jedi.inc](https://github.com/project-jedi/jedi) and that is only because of a [bug in Delphi XE7 registry settings](http://qc.embarcadero.com/wc/qcmain.aspx?d=127616).
+* [Virtual TreeView](https://code.google.com/p/virtual-treeview/) for the UI
+* [Jedi.inc](https://github.com/project-jedi/jedi) and that is only because of a [bug in Delphi XE7 registry settings](http://qc.embarcadero.com/wc/qcmain.aspx?d=127616).
