@@ -7,6 +7,8 @@ Shows/find keyboard short-cuts have be assigned, that may be conflicting.
 
 While there is only a package for XE7 (currently), I have tested it on Delphi XE successfully by copying the DPK file. The only restriction is that it relies on generics.
 
+You will find the information under `Tools` -> `Options...` -> `Third Party` -> `ShortCut Finder` 
+
 #### History
 
 The idea of this Delphi add-on came from a [discussion from Delphi Developers Google+ community](https://plus.google.com/105522328114529031567/posts/69wXU5DwkG8). 
