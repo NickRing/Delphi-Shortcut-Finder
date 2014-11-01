@@ -1,0 +1,82 @@
+package nick.toolsapi.shortcut.DelphiShortcutFinder;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$LIBSUFFIX 'XE7'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  designide,
+  VirtualTreesD;
+
+contains
+  nick.toolsapi.shortcut.ShortCutFinderRegistration in '..\..\Source\nick.toolsapi.shortcut.ShortCutFinderRegistration.pas',
+  nick.toolsapi.shortcut.ShortCutKeyAllocationFrame in '..\..\Source\Frames\nick.toolsapi.shortcut.ShortCutKeyAllocationFrame.pas' {frmShortcutKeyAllocation: TFrame},
+  nick.toolsapi.shortcut.IdeRegisteredShortCutFrame in '..\..\Source\Frames\nick.toolsapi.shortcut.IdeRegisteredShortCutFrame.pas' {frmIdeRegisteredShortCut: TFrame},
+  nick.toolsapi.shortcut.KnownAddOnFrame in '..\..\Source\Frames\nick.toolsapi.shortcut.KnownAddOnFrame.pas' {frmKnownAddOn: TFrame},
+  nick.toolsapi.shortcut.ShortCutItem in '..\..\Source\nick.toolsapi.shortcut.ShortCutItem.pas',
+  nick.toolsapi.shortcut.ShortCutList in '..\..\Source\nick.toolsapi.shortcut.ShortCutList.pas',
+  nick.toolsapi.shortcut.ShortCutRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.ShortCutRepository.pas',
+  nick.toolsapi.shortcut.ToolsApiRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.ToolsApiRepository.pas',
+  nick.toolsapi.shortcut.DelphiMenuElement in '..\..\Source\Elements\Delphi\nick.toolsapi.shortcut.DelphiMenuElement.pas',
+  nick.toolsapi.shortcut.DelphiEditorBaseElement in '..\..\Source\Elements\Base\nick.toolsapi.shortcut.DelphiEditorBaseElement.pas',
+  nick.toolsapi.shortcut.DelphiEditorBriefElement in '..\..\Source\Elements\Delphi\nick.toolsapi.shortcut.DelphiEditorBriefElement.pas',
+  nick.toolsapi.shortcut.DelphiEditorClassicElement in '..\..\Source\Elements\Delphi\nick.toolsapi.shortcut.DelphiEditorClassicElement.pas',
+  nick.toolsapi.shortcut.DelphiEditorDefaultElement in '..\..\Source\Elements\Delphi\nick.toolsapi.shortcut.DelphiEditorDefaultElement.pas',
+  nick.toolsapi.shortcut.DelphiEditorEpsilonElement in '..\..\Source\Elements\Delphi\nick.toolsapi.shortcut.DelphiEditorEpsilonElement.pas',
+  nick.toolsapi.shortcut.DelphiEditorVisualBasicElement in '..\..\Source\Elements\Delphi\nick.toolsapi.shortcut.DelphiEditorVisualBasicElement.pas',
+  nick.toolsapi.shortcut.DelphiEditorVisualStudioElement in '..\..\Source\Elements\Delphi\nick.toolsapi.shortcut.DelphiEditorVisualStudioElement.pas',
+  nick.toolsapi.shortcut.RegistryRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.RegistryRepository.pas',
+  nick.toolsapi.shortcut.RepositoryFactory in '..\..\Source\Repositories\nick.toolsapi.shortcut.RepositoryFactory.pas',
+  nick.toolsapi.shortcut.ShortCutItemBuilder in '..\..\Source\Builders\nick.toolsapi.shortcut.ShortCutItemBuilder.pas',
+  nick.toolsapi.shortcut.DLLExpertBaseElement in '..\..\Source\Elements\Base\nick.toolsapi.shortcut.DLLExpertBaseElement.pas',
+  nick.toolsapi.shortcut.SystemRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.SystemRepository.pas',
+  nick.toolsapi.shortcut.DocumentInsight3Element in '..\..\Source\Elements\ThirdParty\nick.toolsapi.shortcut.DocumentInsight3Element.pas',
+  nick.toolsapi.shortcut.IniFileRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.IniFileRepository.pas',
+  nick.toolsapi.shortcut.MMX10Element in '..\..\Source\Elements\ThirdParty\nick.toolsapi.shortcut.MMX10Element.pas',
+  nick.toolsapi.shortcut.MMX11Element in '..\..\Source\Elements\ThirdParty\nick.toolsapi.shortcut.MMX11Element.pas',
+  nick.toolsapi.shortcut.DDevExtensions2Element in '..\..\Source\Elements\ThirdParty\nick.toolsapi.shortcut.DDevExtensions2Element.pas',
+  nick.toolsapi.shortcut.XmlFileRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.XmlFileRepository.pas',
+  nick.toolsapi.shortcut.GExperts137Element in '..\..\Source\Elements\ThirdParty\nick.toolsapi.shortcut.GExperts137Element.pas',
+  nick.toolsapi.shortcut.Castalia2014 in '..\..\Source\Elements\ThirdParty\nick.toolsapi.shortcut.Castalia2014.pas',
+  nick.toolsapi.shortcut.PackageExpertBaseElement in '..\..\Source\Elements\Base\nick.toolsapi.shortcut.PackageExpertBaseElement.pas',
+  nick.toolsapi.shortcut.CnWizardsElement in '..\..\Source\Elements\ThirdParty\nick.toolsapi.shortcut.CnWizardsElement.pas',
+  nick.toolsapi.shortcut.FileVersionInformation in '..\..\Source\Repositories\nick.toolsapi.shortcut.FileVersionInformation.pas',
+  nick.toolsapi.shortcut.IShortCutList in '..\..\Source\nick.toolsapi.shortcut.IShortCutList.pas',
+  nick.toolsapi.shortcut.IFileVersionInformation in '..\..\Source\Repositories\nick.toolsapi.shortcut.IFileVersionInformation.pas',
+  nick.toolsapi.shortcut.IIniFileRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.IIniFileRepository.pas',
+  nick.toolsapi.shortcut.IRegistryRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.IRegistryRepository.pas',
+  nick.toolsapi.shortcut.IRepositoryFactory in '..\..\Source\Repositories\nick.toolsapi.shortcut.IRepositoryFactory.pas',
+  nick.toolsapi.shortcut.ISystemRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.ISystemRepository.pas',
+  nick.toolsapi.shortcut.IToolsApiRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.IToolsApiRepository.pas',
+  nick.toolsapi.shortcut.INodeXml in '..\..\Source\Repositories\nick.toolsapi.shortcut.INodeXml.pas',
+  nick.toolsapi.shortcut.IXmlFileRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.IXmlFileRepository.pas',
+  nick.toolsapi.shortcut.IShortCutItemBuilder in '..\..\Source\Builders\nick.toolsapi.shortcut.IShortCutItemBuilder.pas',
+  nick.toolsapi.shortcut.ParnassusOUBookmarks in '..\..\Source\Elements\ThirdParty\nick.toolsapi.shortcut.ParnassusOUBookmarks.pas';
+
+end.
+
