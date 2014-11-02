@@ -107,6 +107,8 @@ begin
   vtAssignments.HintMode := hmHint;
 
   vtAssignments.Header.Columns.Items[3].Options := vtAssignments.Header.Columns.Items[3].Options - [coVisible];
+  vtAssignments.TreeOptions.SelectionOptions := vtAssignments.TreeOptions.SelectionOptions + [toFullRowSelect];
+  vtAssignments.TreeOptions.PaintOptions := vtAssignments.TreeOptions.PaintOptions + [toUseExplorerTheme];
 end;
 
 destructor TfrmKnownAddOn.Destroy;

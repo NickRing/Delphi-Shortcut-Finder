@@ -15,6 +15,8 @@ type
     function GetVersionInformation(const AFileName : string; out AVSFixedFileInfo : TVSFixedFileInfo) : Boolean; overload;
     function GetVersionInformation(const AFileName : string) : IFileVersionInformation; overload;
 
+    function GetCurrentProcessID() : DWORD;
+
     function CreateToolhelp32Snapshot(const AFlags : DWORD; const AProcessID: DWORD): THandle;
     function Module32First(const ASnapshotHandle: THandle; var AModuleEntry32: TModuleEntry32): BOOL;
     function Module32Next(const ASnapshotHandle: THandle; var AModuleEntry32: TModuleEntry32): BOOL;
@@ -65,6 +67,11 @@ begin
   Result := (SHGetFolderPath(0, CSIDL_APPDATA, 0, SHGFP_TYPE_CURRENT, @FilePath) = S_OK);
   if Result then
     APath := IncludeTrailingPathDelimiter(FilePath);
+end;
+
+function TSystemRepository.GetCurrentProcessID: DWORD;
+begin
+  Result := Windows.GetCurrentProcessId();
 end;
 
 function TSystemRepository.GetFileVersionInfo(const AFilename: PChar; const AHandle : DWORD; const ALength : DWORD; const APointer: Pointer): BOOL;

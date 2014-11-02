@@ -14,6 +14,8 @@ type
     function GetVersionInformation(const AFileName : string; out AVSFixedFileInfo : TVSFixedFileInfo) : Boolean; overload;
     function GetVersionInformation(const AFileName : string) : IFileVersionInformation; overload;
 
+    function GetCurrentProcessID() : DWORD;
+
     function CreateToolhelp32Snapshot(const AFlags : DWORD; const AProcessID: DWORD): THandle;
     function Module32First(const ASnapshotHandle: THandle; var AModuleEntry32: TModuleEntry32): BOOL;
     function Module32Next(const ASnapshotHandle: THandle; var AModuleEntry32: TModuleEntry32): BOOL;

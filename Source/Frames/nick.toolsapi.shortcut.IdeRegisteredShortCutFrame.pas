@@ -67,6 +67,9 @@ begin
   inherited Create(AOwner);
   FRepositoryFactory := ARepositoryFactory;
   FModuleDetails := TList<TModuleDetail>.Create;
+
+  vtShortCutModuleDetails.TreeOptions.SelectionOptions := vtShortCutModuleDetails.TreeOptions.SelectionOptions + [toFullRowSelect];
+  vtShortCutModuleDetails.TreeOptions.PaintOptions := vtShortCutModuleDetails.TreeOptions.PaintOptions + [toUseExplorerTheme];
 end;
 
 destructor TfrmIdeRegisteredShortCut.Destroy;
@@ -142,7 +145,7 @@ begin
 
     LSystemRepository := FRepositoryFactory.SystemRepository();
 
-    LSnapShotHandle := LSystemRepository.CreateToolhelp32Snapshot(TH32CS_SNAPALL, 0);
+    LSnapShotHandle := LSystemRepository.CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, LSystemRepository.GetCurrentProcessID());
     try
       repeat
         LModuleDetail.Module := '<unknown>';
