@@ -9,6 +9,29 @@ While there is only a package for XE7 (currently), I have tested it on Delphi XE
 
 You will find the information under `Tools` -> `Options...` -> `Third Party` -> `ShortCut Finder` 
 
+#### Mini-documentation
+
+There is currently two tabs:
+* ##### Known Add-ons
+	This tab shows a list shortcuts that **Delphi-Shortcut-Finder** knows about that are currently installed and a description about them. It is possible to:
+	* search by primary shortcut key, and/or 
+	* secondary shortcut key, and/or
+	* Description, by regular expression with/without case sensitivity,
+	or
+	* Just show the conflicting shortcuts.
+ 
+	When searching by primary/secondary shortcut, the following applies:
+
+	* If one or more modifier (ctrl, shift, alt) is press and no key, then all shortcuts that contain those modifiers are shown
+	* If only a key is press, then all shortcuts with that key is shown
+	* Due to a limitation of the control, SPACE and ESCAPE keys (and possibly others) can not be entered. 
+
+
+* ##### IDE Registered ShortCuts
+	This tab will ask the IDE if the shortcut provided has been registered. Using the information back from the IDE, it will try to find the module that deals with the shortcut. If **Delphi-Shortcut-Finder** can not find any information out, it will display "**< unknown >**"
+
+	The order is the order of processing, from the top and going down downwards ie, the top one gets first go at the shortcut. 
+
 #### History
 
 The idea of this Delphi add-on came from a [discussion from Delphi Developers Google+ community](https://plus.google.com/105522328114529031567/posts/69wXU5DwkG8). 
