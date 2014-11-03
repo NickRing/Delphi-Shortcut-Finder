@@ -1,4 +1,4 @@
-object frmIdeRegisteredShortCut: TfrmIdeRegisteredShortCut
+object frmSearchRegisteredShortcuts: TfrmSearchRegisteredShortcuts
   Left = 0
   Top = 0
   Width = 372

@@ -36,8 +36,8 @@ requires
 contains
   nick.toolsapi.shortcut.ShortCutFinderRegistration in '..\..\Source\nick.toolsapi.shortcut.ShortCutFinderRegistration.pas',
   nick.toolsapi.shortcut.ShortCutKeyAllocationFrame in '..\..\Source\Frames\nick.toolsapi.shortcut.ShortCutKeyAllocationFrame.pas' {frmShortcutKeyAllocation: TFrame},
-  nick.toolsapi.shortcut.IdeRegisteredShortCutFrame in '..\..\Source\Frames\nick.toolsapi.shortcut.IdeRegisteredShortCutFrame.pas' {frmIdeRegisteredShortCut: TFrame},
-  nick.toolsapi.shortcut.KnownAddOnFrame in '..\..\Source\Frames\nick.toolsapi.shortcut.KnownAddOnFrame.pas' {frmKnownAddOn: TFrame},
+  nick.toolsapi.shortcut.SearchRegisteredShortcutsFrame in '..\..\Source\Frames\nick.toolsapi.shortcut.SearchRegisteredShortcutsFrame.pas' {frmSearchRegisteredShortcuts: TFrame},
+  nick.toolsapi.shortcut.KnownShortcutsFrame in '..\..\Source\Frames\nick.toolsapi.shortcut.KnownShortcutsFrame.pas' {frmKnownShortcuts: TFrame},
   nick.toolsapi.shortcut.ShortCutItem in '..\..\Source\nick.toolsapi.shortcut.ShortCutItem.pas',
   nick.toolsapi.shortcut.ShortCutList in '..\..\Source\nick.toolsapi.shortcut.ShortCutList.pas',
   nick.toolsapi.shortcut.ShortCutRepository in '..\..\Source\Repositories\nick.toolsapi.shortcut.ShortCutRepository.pas',

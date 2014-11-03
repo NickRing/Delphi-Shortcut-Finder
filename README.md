@@ -47,10 +47,16 @@ I would like to thank Andreas Hausladen for telling me where [DDevExtensions](ht
 * [Virtual TreeView](https://code.google.com/p/virtual-treeview/) for the UI. This needs to be installed first.
 * [Jedi.inc](https://github.com/project-jedi/jedi) and that is only because of a [bug in Delphi XE7 registry settings](http://qc.embarcadero.com/wc/qcmain.aspx?d=127616).
 
+#### Known issue(s)
+
+* The TRichEdit component has a Zoom property that was introduced in XE6. If you are using a version previous to XE6, the IDE will pop-up a dialog saying that the property doesn't exists - click on `Ignore` and all should be fine.
+
+
 #### History
 
 * 2014/11/02
 	* Initial release to the world
 * 2014/11/03 
 	* Modified finding module to only search the current process. Suggested by David Millington.
-	* Changed the Virtual TreeViews to include full row selection and to use explorer themes. Suggested by Achim Kalwa 
+	* Changed the Virtual TreeViews to include full row selection and to use explorer themes. Suggested by Achim Kalwa.
+	* Changed tab caption from a suggestion by David Millington.

@@ -1,4 +1,4 @@
-unit nick.toolsapi.shortcut.IdeRegisteredShortCutFrame;
+unit nick.toolsapi.shortcut.SearchRegisteredShortcutsFrame;
 
 interface
 
@@ -18,7 +18,7 @@ uses
   Generics.Collections;
 
 type
-  TfrmIdeRegisteredShortCut = class(TFrame)
+  TfrmSearchRegisteredShortcuts = class(TFrame)
     grpAdvanceFiltering: TGroupBox;
     hkAdvance: THotKey;
     vtShortCutModuleDetails: TVirtualStringTree;
@@ -62,7 +62,7 @@ uses
 
 {$R *.dfm}
 
-constructor TfrmIdeRegisteredShortCut.Create(const AOwner: TComponent; const ARepositoryFactory: IRepositoryFactory);
+constructor TfrmSearchRegisteredShortcuts.Create(const AOwner: TComponent; const ARepositoryFactory: IRepositoryFactory);
 begin
   inherited Create(AOwner);
   FRepositoryFactory := ARepositoryFactory;
@@ -72,13 +72,13 @@ begin
   vtShortCutModuleDetails.TreeOptions.PaintOptions := vtShortCutModuleDetails.TreeOptions.PaintOptions + [toUseExplorerTheme];
 end;
 
-destructor TfrmIdeRegisteredShortCut.Destroy;
+destructor TfrmSearchRegisteredShortcuts.Destroy;
 begin
   FModuleDetails.Free;
   inherited;
 end;
 
-procedure TfrmIdeRegisteredShortCut.ModifyVirtualTree(const AProc: TProc);
+procedure TfrmSearchRegisteredShortcuts.ModifyVirtualTree(const AProc: TProc);
 begin
   vtShortCutModuleDetails.TreeOptions.MiscOptions := vtShortCutModuleDetails.TreeOptions.MiscOptions - [toReadOnly];
   try
@@ -88,17 +88,17 @@ begin
   end;
 end;
 
-procedure TfrmIdeRegisteredShortCut.CMShowingChanged(var M: TMessage);
+procedure TfrmSearchRegisteredShortcuts.CMShowingChanged(var M: TMessage);
 begin
   inherited;
 end;
 
-procedure TfrmIdeRegisteredShortCut.hkAdvanceChange(Sender: TObject);
+procedure TfrmSearchRegisteredShortcuts.hkAdvanceChange(Sender: TObject);
 begin
   FindShortCutInformation();
 end;
 
-procedure TfrmIdeRegisteredShortCut.FindModuleDetails(const AKeyBindingRec: TKeyBindingRec;
+procedure TfrmSearchRegisteredShortcuts.FindModuleDetails(const AKeyBindingRec: TKeyBindingRec;
                                                       const ASystemRepository: ISystemRepository;
                                                       const ASnapShotHandle: THandle;
                                                       var AModuleDetail: TModuleDetail);
@@ -124,7 +124,7 @@ begin
   end;
 end;
 
-procedure TfrmIdeRegisteredShortCut.FindShortCutInformation();
+procedure TfrmSearchRegisteredShortcuts.FindShortCutInformation();
 var
   LOTAKeyboardServices : IOTAKeyboardServices;
   LSystemRepository : ISystemRepository;
@@ -171,7 +171,7 @@ begin
   end;
 end;
 
-procedure TfrmIdeRegisteredShortCut.vtShortCutModuleDetailsGetText(Sender: TBaseVirtualTree;
+procedure TfrmSearchRegisteredShortcuts.vtShortCutModuleDetailsGetText(Sender: TBaseVirtualTree;
                                                                    Node: PVirtualNode;
                                                                    Column: TColumnIndex;
                                                                    TextType: TVSTTextType;

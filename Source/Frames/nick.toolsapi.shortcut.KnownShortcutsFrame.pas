@@ -1,4 +1,4 @@
-unit nick.toolsapi.shortcut.KnownAddOnFrame;
+unit nick.toolsapi.shortcut.KnownShortcutsFrame;
 
 interface
 
@@ -19,7 +19,7 @@ uses
   Generics.Collections;
 
 type
-  TfrmKnownAddOn = class(TFrame)
+  TfrmKnownShortcuts = class(TFrame)
     grpFiltering: TGroupBox;
     lblPrimary: TLabel;
     lblSecondary: TLabel;
@@ -92,7 +92,7 @@ uses
 
 {$R *.dfm}
 
-constructor TfrmKnownAddOn.Create(const AOwner: TComponent;
+constructor TfrmKnownShortcuts.Create(const AOwner: TComponent;
                                   const ARepositoryFactory : IRepositoryFactory;
                                   const AShortCutRepository : IShortCutRepository);
 begin
@@ -111,13 +111,13 @@ begin
   vtAssignments.TreeOptions.PaintOptions := vtAssignments.TreeOptions.PaintOptions + [toUseExplorerTheme];
 end;
 
-destructor TfrmKnownAddOn.Destroy;
+destructor TfrmKnownShortcuts.Destroy;
 begin
   FConflict.Free;
   inherited;
 end;
 
-procedure TfrmKnownAddOn.CMShowingChanged(var M: TMessage);
+procedure TfrmKnownShortcuts.CMShowingChanged(var M: TMessage);
 begin
   inherited;
   if Showing and (Length(FShortCutElements) = 0) then
@@ -129,7 +129,7 @@ end;
 
 // The following two methods are from: http://delphi.about.com/library/code/ncaa111803a.htm
 // To implement clickable links in TRichEdit
-procedure TfrmKnownAddOn.InitRichEditURLDetection(const ARichEdit: TRichEdit);
+procedure TfrmKnownShortcuts.InitRichEditURLDetection(const ARichEdit: TRichEdit);
 var
   LMask: NativeInt;
 begin
@@ -138,7 +138,7 @@ begin
   SendMessage(ARichEdit.Handle, EM_AUTOURLDETECT, Integer(True), 0);
 end;
 
-procedure TfrmKnownAddOn.WndProc(var Msg: TMessage);
+procedure TfrmKnownShortcuts.WndProc(var Msg: TMessage);
 var
   LENLink: TENLink;
   LURL: string;
@@ -164,7 +164,7 @@ begin
   inherited;
 end;
 
-procedure TfrmKnownAddOn.AddConflictingFilter(const AFilterList: TList<TFilterFunc>);
+procedure TfrmKnownShortcuts.AddConflictingFilter(const AFilterList: TList<TFilterFunc>);
 begin
   if (not chkConficts.Checked) then
     Exit;
@@ -184,7 +184,7 @@ begin
                   end);
 end;
 
-procedure TfrmKnownAddOn.AddHotKeyFilter(const AFilterList: TList<TFilterFunc>;
+procedure TfrmKnownShortcuts.AddHotKeyFilter(const AFilterList: TList<TFilterFunc>;
   const AShortCutFunc: TFunc<TShortCut>;
   const AShortCutItemFunc: TFunc<IShortCutItem, TShortCut>);
 var
@@ -221,7 +221,7 @@ begin
                   end);
 end;
 
-procedure TfrmKnownAddOn.AddTextFilter(const AFilterList: TList<TFilterFunc>);
+procedure TfrmKnownShortcuts.AddTextFilter(const AFilterList: TList<TFilterFunc>);
 var
   LRegEx: TRegEx;
   LRegExOptions: TRegExOptions;
@@ -255,7 +255,7 @@ begin
                   end);
 end;
 
-procedure TfrmKnownAddOn.ModifyVirtualTree(const AProc: TProc);
+procedure TfrmKnownShortcuts.ModifyVirtualTree(const AProc: TProc);
 begin
   vtAssignments.TreeOptions.MiscOptions := vtAssignments.TreeOptions.MiscOptions - [toReadOnly];
   try
@@ -265,29 +265,29 @@ begin
   end;
 end;
 
-procedure TfrmKnownAddOn.chkCaseSensitiveClick(Sender: TObject);
+procedure TfrmKnownShortcuts.chkCaseSensitiveClick(Sender: TObject);
 begin
   FilterShortCuts();
 end;
 
-procedure TfrmKnownAddOn.chkConfictsClick(Sender: TObject);
+procedure TfrmKnownShortcuts.chkConfictsClick(Sender: TObject);
 begin
   if chkConficts.Checked and not Assigned(FConflict) then
     PopulateConflicts();
   FilterShortCuts();
 end;
 
-procedure TfrmKnownAddOn.chkRegExpClick(Sender: TObject);
+procedure TfrmKnownShortcuts.chkRegExpClick(Sender: TObject);
 begin
   FilterShortCuts();
 end;
 
-procedure TfrmKnownAddOn.edtDescChange(Sender: TObject);
+procedure TfrmKnownShortcuts.edtDescChange(Sender: TObject);
 begin
   FilterShortCuts();
 end;
 
-procedure TfrmKnownAddOn.FilterShortCuts;
+procedure TfrmKnownShortcuts.FilterShortCuts;
 var
   LFilter: TFilterFunc;
   LFilterList: TList<TFilterFunc>;
@@ -344,17 +344,17 @@ begin
   end;
 end;
 
-procedure TfrmKnownAddOn.hkPrimaryChange(Sender: TObject);
+procedure TfrmKnownShortcuts.hkPrimaryChange(Sender: TObject);
 begin
   FilterShortCuts();
 end;
 
-procedure TfrmKnownAddOn.hkSecondaryChange(Sender: TObject);
+procedure TfrmKnownShortcuts.hkSecondaryChange(Sender: TObject);
 begin
   FilterShortCuts();
 end;
 
-procedure TfrmKnownAddOn.PopulateConflicts;
+procedure TfrmKnownShortcuts.PopulateConflicts;
 var
   lp: Integer;
   LPair: TPair<TShortCut, TShortCut>;
@@ -375,7 +375,7 @@ begin
     end;
 end;
 
-procedure TfrmKnownAddOn.RescanShortCutKeys;
+procedure TfrmKnownShortcuts.RescanShortCutKeys;
 begin
   vtAssignments.RootNodeCount := 0;
 
@@ -393,7 +393,7 @@ begin
                     end);
 end;
 
-procedure TfrmKnownAddOn.vtAssignmentsChange(Sender: TBaseVirtualTree; Node: PVirtualNode);
+procedure TfrmKnownShortcuts.vtAssignmentsChange(Sender: TBaseVirtualTree; Node: PVirtualNode);
 var
   LShortCut: IShortCutItem;
 begin
@@ -420,7 +420,7 @@ begin
   end;
 end;
 
-procedure TfrmKnownAddOn.vtAssignmentsGetHint(Sender: TBaseVirtualTree; Node:
+procedure TfrmKnownShortcuts.vtAssignmentsGetHint(Sender: TBaseVirtualTree; Node:
     PVirtualNode; Column: TColumnIndex; var LineBreakStyle:
     TVTTooltipLineBreakStyle; var HintText: string);
 var
@@ -439,7 +439,7 @@ begin
   LineBreakStyle := hlbForceMultiLine;
 end;
 
-procedure TfrmKnownAddOn.vtAssignmentsGetText(Sender: TBaseVirtualTree; Node:
+procedure TfrmKnownShortcuts.vtAssignmentsGetText(Sender: TBaseVirtualTree; Node:
     PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType; var CellText:
     string);
 var

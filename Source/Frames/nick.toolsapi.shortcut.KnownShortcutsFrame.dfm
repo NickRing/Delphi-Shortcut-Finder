@@ -1,4 +1,4 @@
-object frmKnownAddOn: TfrmKnownAddOn
+object frmKnownShortcuts: TfrmKnownShortcuts
   Left = 0
   Top = 0
   Width = 415

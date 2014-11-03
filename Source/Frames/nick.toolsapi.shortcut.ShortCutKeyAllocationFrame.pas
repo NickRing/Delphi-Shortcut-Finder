@@ -11,8 +11,8 @@ uses
 type
   TfrmShortCutKeyAllocation = class(TFrame)
     pgc1: TPageControl;
-    tsKnownAddons: TTabSheet;
-    tsIdeRegisteredShortCut: TTabSheet;
+    tsKnownShortcuts: TTabSheet;
+    tsSearchRegisteredShortcuts: TTabSheet;
   public
     constructor Create(AOwner: TComponent); override;
   end;
@@ -20,8 +20,8 @@ type
 implementation
 
 uses
-  nick.toolsapi.shortcut.KnownAddOnFrame,
-  nick.toolsapi.shortcut.IdeRegisteredShortCutFrame,
+  nick.toolsapi.shortcut.KnownShortcutsFrame,
+  nick.toolsapi.shortcut.SearchRegisteredShortcutsFrame,
   nick.toolsapi.shortcut.IRepositoryFactory,
   nick.toolsapi.shortcut.RepositoryFactory,
   nick.toolsapi.shortcut.ShortCutRepository;
@@ -39,17 +39,17 @@ begin
 
   LRepositoryFactory := TRepositoryFactory.New();
 
-  LFrame := TfrmKnownAddOn.Create(Self, LRepositoryFactory, nick.toolsapi.shortcut.ShortCutRepository.GetShortCutRepository());
+  LFrame := TfrmKnownShortcuts.Create(Self, LRepositoryFactory, nick.toolsapi.shortcut.ShortCutRepository.GetShortCutRepository());
   LFrame.Align       := alClient;
-  LFrame.Parent      := tsKnownAddons;
+  LFrame.Parent      := tsKnownShortcuts;
   LFrame.Visible     := True;
 
-  LFrame := TfrmIdeRegisteredShortCut.Create(Self, LRepositoryFactory);
+  LFrame := TfrmSearchRegisteredShortcuts.Create(Self, LRepositoryFactory);
   LFrame.Align       := alClient;
-  LFrame.Parent      := tsIdeRegisteredShortCut;
+  LFrame.Parent      := tsSearchRegisteredShortcuts;
   LFrame.Visible     := True;
 
-  pgc1.ActivePage := tsKnownAddons;
+  pgc1.ActivePage := tsKnownShortcuts;
 end;
 
 end.

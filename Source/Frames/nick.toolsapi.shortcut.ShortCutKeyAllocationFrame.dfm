@@ -11,19 +11,15 @@ object frmShortcutKeyAllocation: TfrmShortcutKeyAllocation
     Top = 0
     Width = 474
     Height = 374
-    ActivePage = tsKnownAddons
+    ActivePage = tsSearchRegisteredShortcuts
     Align = alClient
     TabOrder = 0
-    object tsKnownAddons: TTabSheet
-      Caption = '&Known Add-ons'
+    object tsKnownShortcuts: TTabSheet
+      Caption = '&Known Shortcuts'
     end
-    object tsIdeRegisteredShortCut: TTabSheet
-      Caption = '&IDE Registered ShortCuts'
+    object tsSearchRegisteredShortcuts: TTabSheet
+      Caption = '&Search Registered Shortcuts'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
 end
