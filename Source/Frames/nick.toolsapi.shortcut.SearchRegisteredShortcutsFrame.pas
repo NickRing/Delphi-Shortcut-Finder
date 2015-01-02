@@ -213,14 +213,14 @@ begin
     LModuleDetail := FModuleDetails.Items[Node.Parent.Parent.Index];
     LKeyBindingRec := LModuleDetail.KeyBindingRec;
 
-    if (Node.Parent.Index = Node.Parent.Parent.ChildCount - 1) then
+    if (Node.Parent.Index = 3) then
     begin
       case Column of
         0 : CellText := LModuleDetail.FileVersionInformation.FieldName[Node.Index];
         1 : CellText := LModuleDetail.FileVersionInformation.FieldValue[Node.Index];
       end;
     end
-    else if (Node.Parent.Index = Node.Parent.Parent.ChildCount - 2) then
+    else if (Node.Parent.Index = 2) then
     begin
       case Column of
         0 :
