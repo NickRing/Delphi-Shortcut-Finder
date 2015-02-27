@@ -11,10 +11,17 @@ uses
   nick.shortcut.repository.IToolsApi,
   nick.shortcut.element.DLLExpertBase,
   nick.shortcut.repository.IRegistry,
+  {$IFDEF VER220}
+  Menus,
+  SysUtils,
+  Classes,
+  Windows;
+  {$ELSE}
   Vcl.Menus,
   System.SysUtils,
   System.Classes,
   Winapi.Windows;
+  {$ENDIF}
 
 type
   TXExPlusPackElement = class(TDLLExpertBaseElement)
@@ -118,7 +125,11 @@ begin
   if (Length(LKey) = 0) then
     Exit(scNone);
 
-  Result := Vcl.Menus.ShortCut(Ord(LKey[1]), LShiftState);
+  {$IFDEF VER220}
+  Result := Menus.ShortCut(Ord(LKey[1]), LShiftState);
+  {$ELSE}
+  Result := SystemRepository().ShortCut(Ord(LKey[1]), LShiftState);
+  {$ENDIF}
 end;
 
 function TXExPlusPackElement.VisualFormsEnabledDecoder(const ARegistryRepository: IRegistryRepository; const ASectionKey: string): Boolean;
@@ -157,7 +168,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Activate Project')
                                     .WithDescription('Tools -> Options... -> Third Party -> JED Software -> Active Project -> Keys -> Active Project -> Show dialog')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('A'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('A'), [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(LBaseRegistryKey + 'Activate Project\Keys')
                                     .WithKey('Activate')
@@ -172,7 +183,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Activate Project:Show And Select Next')
                                     .WithDescription('Tools -> Options... -> Third Party -> JED Software -> Active Project -> Keys -> Active Project -> Switch Project -> Show And Select Next' + System.sLineBreak + 'http://www.jed-software.com/help/ActivateProject/ActivateProject.html')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('D'), [ssCtrl, ssShift, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('D'), [ssCtrl, ssShift, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(LBaseRegistryKey + 'Activate Project\Keys')
                                     .WithKey('Switch')
@@ -187,7 +198,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Activate Project:Select Prior')
                                     .WithDescription('Tools -> Options... -> Third Party -> JED Software -> Active Project -> Keys -> Active Project -> Switch Project -> Select Prior' + System.sLineBreak + 'http://www.jed-software.com/help/ActivateProject/ActivateProject.html')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('F'), [ssCtrl, ssShift, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('F'), [ssCtrl, ssShift, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(LBaseRegistryKey + 'Activate Project\Keys')
                                     .WithKey('Switch Prior')
@@ -202,7 +213,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Activate Project:Create Project Preview')
                                     .WithDescription('Tools -> Options... -> Third Party -> JED Software -> Active Project -> Keys -> Active Project -> Create Project Preview -> Create Preview' + System.sLineBreak + 'http://www.jed-software.com/help/ActivateProject/ActivateProject.html')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('S'), [ssCtrl, ssShift, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('S'), [ssCtrl, ssShift, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(LBaseRegistryKey + 'Activate Project\Keys')
                                     .WithKey('Create Preview')
@@ -217,7 +228,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Bookmark Guide:Menu Short Cut')
                                     .WithDescription('Tools -> Options... -> Third Party -> JED Software -> Active Project -> Keys -> Bookmark Guide -> Menu Short Cut' + System.sLineBreak + 'http://www.jed-software.com/help/BookmarkGuide/BookmarkGuide.html')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('B'), [ssCtrl, ssShift, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('B'), [ssCtrl, ssShift, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(LBaseRegistryKey + 'Bookmark Guide\General')
                                     .WithKey('ShortCut')
@@ -232,7 +243,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Bookmark Guide:Floating Viewer Short Cut')
                                     .WithDescription('Tools -> Options... -> Third Party -> JED Software -> Active Project -> Keys -> Bookmark Guide -> Floating Viewer Short Cut' + System.sLineBreak + 'http://www.jed-software.com/help/BookmarkGuide/BookmarkGuide.html')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('B'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('B'), [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(LBaseRegistryKey + 'Bookmark Guide\General')
                                     .WithKey('FloatingShortCut')
@@ -247,7 +258,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Visual Forms')
                                     .WithDescription('http://www.jed-software.com/help/VisualForms/VisualForms.html')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_F12, [ssCtrl, ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_F12, [ssCtrl, ssShift]))
                                     .WithActiveState(True)
                                     .IsRegistry()
                                     .WithPath(LPlusPackPath)
@@ -258,7 +269,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Watch Property Group')
                                     .WithDescription(' View -> Debug Windows -> Watch Property Group' + System.sLineBreak + 'http://www.jed-software.com/help/WatchPropertyGroup/WatchPropertyGroup.html')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('W'), [ssCtrl, ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('W'), [ssCtrl, ssShift]))
                                     .WithActiveState(True)
                                     .IsRegistry()
                                     .WithPath(LPlusPackPath)
@@ -269,7 +280,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Structure Pane Enhancements')
                                     .WithDescription('Tools -> Options... -> Third Party -> JED Software -> ' + LIdeName + ' Plus Pack -> Structure Pane Enhancements' + System.sLineBreak + 'http://www.jed-software.com/help/StructurePane/StructurePane.html')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('S'), [ssCtrl, ssShift, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('S'), [ssCtrl, ssShift, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(LPlusPackPath + 'Structure View')
                                     .WithKey('KeyCode')
@@ -292,7 +303,7 @@ begin
                                                        'current location and it will not be changed. ' +
                                                        'Press the shortcut again quickly to move ' +
                                                        'the bookmark to the current line.')
-                                      .WithShortCut(Vcl.Menus.ShortCut(Ord(LChr), [ssCtrl, ssShift]))
+                                      .WithShortCut(SystemRepository().ShortCut(Ord(LChr), [ssCtrl, ssShift]))
                                       .WithActiveState(True)
                                       .IsRegistry()
                                       .WithPath(LPlusPackPath)
@@ -305,7 +316,7 @@ begin
                                       .WithDescription('Move to the specified bookmark. The cursor ' +
                                                        'will be moved to the beginning of that line, ' +
                                                        'and the line made visible onscreen.')
-                                      .WithShortCut(Vcl.Menus.ShortCut(Ord(LChr), [ssCtrl]))
+                                      .WithShortCut(SystemRepository().ShortCut(Ord(LChr), [ssCtrl]))
                                       .WithActiveState(True)
                                       .IsRegistry()
                                       .WithPath(LPlusPackPath)

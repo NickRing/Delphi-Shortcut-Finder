@@ -13,12 +13,21 @@ implementation
 
 uses
   ToolsApi,
+  {$IFDEF VER220}
+  Forms,
+  SysUtils,
+  Controls,
+  Menus,
+  ActnList,
+  Windows,
+  {$ELSE}
   Vcl.Forms,
   System.SysUtils,
   Vcl.Controls,
   Vcl.Menus,
   Vcl.ActnList,
   Winapi.Windows,
+  {$ENDIF}
   nick.shortcut.frame.ShortCutKeyAllocation,
   nick.shortcut.factory.Repository;
 
@@ -76,7 +85,11 @@ begin
   FPluginSplashScreenIcon := LoadBitmap(HInstance, cSHORTCUT_FINDER_ICON);
   SplashScreenServices.AddPluginBitmap('Delphi Shortcut Finder', FPluginSplashScreenIcon, False, 'Freeware');
 
+  {$IFDEF VER220}
+  if SysUtils.Supports(ToolsAPI.BorlandIDEServices, IOTAAboutBoxServices, LOTAAboutBoxServices) then
+  {$ELSE}
   if System.SysUtils.Supports(ToolsAPI.BorlandIDEServices, IOTAAboutBoxServices, LOTAAboutBoxServices) then
+  {$ENDIF}
   begin
     if (FAboutboxSplashScreenIcon = 0) then
       FAboutboxSplashScreenIcon := LoadBitmap(HInstance, cSHORTCUT_FINDER_ICON);
@@ -89,8 +102,13 @@ begin
                                                               '');
   end;
 
-  if not Supports(BorlandIDEServices, INTAServices, LNTAServices) then
+  {$IFDEF VER220}
+  if not SysUtils.Supports(BorlandIDEServices, INTAServices, LNTAServices) then
     Exit;
+  {$ELSE}
+  if not System.SysUtils.Supports(BorlandIDEServices, INTAServices, LNTAServices) then
+    Exit;
+  {$ENDIF}
 
   FExplorerAction := TAction.Create(nil);
   FExplorerAction.ActionList := LNTAServices.ActionList;
@@ -138,8 +156,13 @@ var
 begin
   if (FAddPluginInfoIndex <> 0) then
   begin
+  {$IFDEF VER220}
+    if SysUtils.Supports(ToolsAPI.BorlandIDEServices, IOTAAboutBoxServices, LOTAAboutBoxServices) then
+      LOTAAboutBoxServices.RemovePluginInfo(FAddPluginInfoIndex);
+  {$ELSE}
     if System.SysUtils.Supports(ToolsAPI.BorlandIDEServices, IOTAAboutBoxServices, LOTAAboutBoxServices) then
       LOTAAboutBoxServices.RemovePluginInfo(FAddPluginInfoIndex);
+  {$ENDIF}
   end;
 
   FAddPluginInfoIndex := 0;

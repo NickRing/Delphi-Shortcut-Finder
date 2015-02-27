@@ -6,11 +6,17 @@ implementation
 
 uses
   nick.shortcut.repository.ShortcutExport,
-  System.SysUtils,
-  System.Classes,
   nick.shortcut.core.ShortcutExport,
   nick.shortcut.other.VirtualKeys,
+  {$IFDEF VER220}
+  SysUtils,
+  Classes,
+  Forms;
+  {$ELSE}
+  System.SysUtils,
+  System.Classes,
   Vcl.Forms;
+  {$ENDIF}
 
 type
   TCsvShortcutExport = class(TShortcutExport)

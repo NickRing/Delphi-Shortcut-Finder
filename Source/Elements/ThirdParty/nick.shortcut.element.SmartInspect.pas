@@ -9,10 +9,16 @@ uses
   nick.shortcut.builder.IShortCutItem,
   nick.shortcut.builder.ShortCutItem,
   nick.shortcut.element.DLLExpertBase,
+  {$IFDEF VER220}
+  SysUtils,
+  Classes,
+  Windows;
+  {$ELSE}
   System.SysUtils,
   Vcl.Menus,
   System.Classes,
   Winapi.Windows;
+  {$ENDIF}
 
 type
   TSmartInspectElement = class(TDLLExpertBaseElement)
@@ -61,35 +67,35 @@ begin
                                     .WithDetail('Instrument Unit')
                                     .WithDescription('Opens a dialog and allows you to select which methods should be instrumented or uninstrumented.' +
                                                      System.sLineBreak + 'SmartInspect -> Instrument Unit...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('I'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('I'), [ssCtrl, ssAlt]))
                                     .Build;
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Instrument Current Method')
                                     .WithDescription('Instruments the method where your text cursor is positioned.' +
                                                      System.sLineBreak + 'SmartInspect -> Instrument Current Method')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('N'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('N'), [ssCtrl, ssAlt]))
                                     .Build;
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Uninstrument Current Method')
                                     .WithDescription('Uninstruments the method where your text cursor is positioned.' +
                                                      System.sLineBreak + 'SmartInspect -> Uninstrument Current Method')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('J'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('J'), [ssCtrl, ssAlt]))
                                     .Build;
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Instrument All Methods')
                                     .WithDescription('Instruments all methods and functions in the current unit.' +
                                                      System.sLineBreak + 'SmartInspect -> Instrument All Methods')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('A'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('A'), [ssCtrl, ssAlt]))
                                     .Build;
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Uninstrument All Methods')
                                     .WithDescription('Uninstruments all methods and functions in the current unit.' +
                                                      System.sLineBreak + 'SmartInspect -> Uninstrument All Methods')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('X'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('X'), [ssCtrl, ssAlt]))
                                     .Build;
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
@@ -97,7 +103,7 @@ begin
                                     .WithDescription('Updates the method names in the Enter- and LeaveMethod calls of ' +
                                                      'all instrumented methods and functions in the current unit.' +
                                                      System.sLineBreak + 'SmartInspect -> Update All Methods')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('U'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('U'), [ssCtrl, ssAlt]))
                                     .Build;
 end;
 

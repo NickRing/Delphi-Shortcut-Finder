@@ -6,6 +6,7 @@ uses
   nick.shortcut.core.ShortCutItem,
   nick.shortcut.repository.IIniFile,
   nick.shortcut.repository.IRegistry,
+  nick.shortcut.repository.ISystem,
   nick.shortcut.repository.IXmlFile;
 
 type
@@ -19,6 +20,7 @@ type
     function IniFileRepository() : IIniFileRepository;
     function XmlFileRepository() : IXmlFileRepository;
     function RegistryRepository() : IRegistryRepository;
+    function SystemRepository() : ISystemRepository;
 
     procedure RetrieveShortCuts();
 

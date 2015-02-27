@@ -14,10 +14,15 @@ uses
   nick.shortcut.repository.IXmlFile,
   nick.shortcut.other.INodeXml,
   nick.shortcut.element.DLLExpertBase,
-  System.Classes,
-  Vcl.Menus,
+  {$IFDEF VER220}
+  SysUtils,
+  Classes,
+  Windows;
+  {$ELSE}
   System.SysUtils,
+  System.Classes,
   Winapi.Windows;
+  {$ENDIF}
 
 type
   TCnWizards = class(TDLLExpertBaseElement)
@@ -164,7 +169,7 @@ begin
       if (TryStrToInt(LShortCutNode.NodeValue, LInteger)) then
         LShortCut := LInteger
       else
-        LShortCut := Vcl.Menus.TextToShortCut(LShortCutNode.NodeValue);
+        LShortCut := SystemRepository().TextToShortCut(LShortCutNode.NodeValue);
 
       nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                         .WithDetail(ADetail + LCaptionNode.NodeValue)
@@ -188,65 +193,65 @@ begin
                                     .WithDetail('Toggle Comment')
                                     .WithDescription('Toggle Comment Selected Code Block' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: Editor RMC -> CnPack Editor Menu -> Comment -> Toggle Comment')
-                                    .WithShortCut(Vcl.Menus.ShortCut({/}VK_OEM_2, [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut({/}VK_OEM_2, [ssCtrl]))
                                     .Build();
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Indent block')
                                     .WithDescription('Moves the cursor to the right one tab position / Indents the current selected block by the amount specified in the block indent setting' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: Editor RMC -> CnPack Editor Menu -> Format -> Indent')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_TAB, []))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_TAB, []))
                                     .Build();
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Unindent block')
                                     .WithDescription('Moves the cursor to the left one tab position / Outdents the current selected block by the amount specified in the block indent setting' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: Editor RMC -> CnPack Editor Menu -> Format -> Unindent')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_TAB, [ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_TAB, [ssShift]))
                                     .Build();
 
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Copy word under Cursor / selected block')
                                     .WithDescription('Activate: Editor RMC -> CnPack Editor Menu -> Edit -> Copy')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('C'), [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('C'), [ssCtrl]))
                                     .Build();
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Cut selection to clipboard')
                                     .WithDescription('Activate: Editor RMC -> CnPack Editor Menu -> Edit -> Cut')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('C'), [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('C'), [ssCtrl]))
                                     .Build();
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Duplicate line')
                                     .WithDescription('Activate: Editor RMC -> CnPack Editor Menu -> Edit -> Duplicate')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('D'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('D'), [ssCtrl, ssAlt]))
                                     .Build();
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Deletes selected block or the character to the right of the cursor')
                                     .WithDescription('Activate: Editor RMC -> CnPack Editor Menu -> Edit -> Delete')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_DELETE, []))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_DELETE, []))
                                     .Build();
 
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Move (line) Up')
                                     .WithDescription('Activate: Editor RMC -> CnPack Editor Menu -> Others -> Move Up')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('U'), [ssShift, ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('U'), [ssShift, ssCtrl, ssAlt]))
                                     .Build();
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Move (line) Down')
                                     .WithDescription('Activate: Editor RMC -> CnPack Editor Menu -> Others -> Move Down')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('D'), [ssShift, ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('D'), [ssShift, ssCtrl, ssAlt]))
                                     .Build();
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Delete lines')
                                     .WithDescription('Activate: Editor RMC -> CnPack Editor Menu -> Others -> Delete Lines')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('D'), [ssShift, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('D'), [ssShift, ssCtrl]))
                                     .Build();
 
   PopulateDynamicContextMenuShortcuts();
@@ -295,7 +300,7 @@ begin
                                     .WithDetail('Run Separately From IDE')
                                     .WithDescription('Run Separately From IDE, without Debugging' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Project Enhancements -> Run Separately From IDE')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_F9, [ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_F9, [ssShift]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnProjExtRunSeparately')
@@ -317,7 +322,7 @@ begin
                                     .WithDetail('Toggle Comment')
                                     .WithDescription('Toggle Comment Selected Code Block' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Code Editor Wizard -> Toggle Comment')
-                                    .WithShortCut(Vcl.Menus.ShortCut({/}VK_OEM_2, [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut({/}VK_OEM_2, [ssCtrl]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnEditorCodeToggleComment')
@@ -1133,7 +1138,7 @@ begin
                                     .WithDetail('Copy Component''s Name')
                                     .WithDescription('Copy Selected Component''s Name to Clipboard' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Form Design Wizard -> More... -> Copy Component''s Name')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('N'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('N'), [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnCopyCompName')
@@ -1301,7 +1306,7 @@ begin
                                     .WithDetail('Open File...')
                                     .WithDescription('Search and Open File in Search Path.' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Code Editor Wizard -> Open File...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('O'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('O'), [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnEditorOpenFile')
@@ -1595,7 +1600,7 @@ begin
                                     .WithDetail('Toggle Uses/Include')
                                     .WithDescription('Jump between Current Place and Uses/Include Part' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Code Editor Wizard -> Toggle Uses/Include')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('U'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('U'), [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnEditorToggleUses')
@@ -1616,7 +1621,7 @@ begin
                                     .WithDetail('Toggle Var Field')
                                     .WithDescription('Jump between Current Place and Var Field' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Code Editor Wizard -> Toggle Var Field')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('V'), [ssShift, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('V'), [ssShift, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnEditorToggleVar')
@@ -1637,7 +1642,7 @@ begin
                                     .WithDetail('Previous Message Line')
                                     .WithDescription('In Editor, Jump to Previous Line Marked by Selected Item in Message View' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Code Editor Wizard -> Previous Message Line')
-                                    .WithShortCut(Vcl.Menus.ShortCut({,}VK_OEM_COMMA, [ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut({,}VK_OEM_COMMA, [ssAlt]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnEditorPrevMessage')
@@ -1658,7 +1663,7 @@ begin
                                     .WithDetail('Next Message Line')
                                     .WithDescription('In Editor, Jump to Next Line Marked by Selected Item in Message View' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Code Editor Wizard -> Next Message Line')
-                                    .WithShortCut(Vcl.Menus.ShortCut({.}VK_OEM_PERIOD, [ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut({.}VK_OEM_PERIOD, [ssAlt]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnEditorNextMessage')
@@ -1721,7 +1726,7 @@ begin
                                     .WithDetail('Jump to Matched Keyword')
                                     .WithDescription('Jump to Matched Keyword under Cursor' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Code Editor Wizard -> Jump to Matched Keyword')
-                                    .WithShortCut(Vcl.Menus.ShortCut({,}VK_OEM_COMMA, [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut({,}VK_OEM_COMMA, [ssCtrl]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnEditorJumpMatchedKeyword')
@@ -1742,7 +1747,7 @@ begin
                                     .WithDetail('Jump to Previous Identifier')
                                     .WithDescription('Jump to Previous Identifier under Cursor' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Code Editor Wizard -> Jump to Previous Identifier')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_Up, [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_Up, [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnEditorJumpPrevIdent')
@@ -1763,7 +1768,7 @@ begin
                                     .WithDetail('Jump to Next Identifier')
                                     .WithDescription('Jump to Next Identifier under Cursor' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Code Editor Wizard -> Jump to Next Identifier')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_Down, [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_Down, [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnEditorJumpNextIdent')
@@ -1879,7 +1884,7 @@ begin
                                     .WithDetail('All Components of Current Form')
                                     .WithDescription('Auto Set Tab Orders in the Form.' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Tab Orders -> All Components of Current Form')
-                                    .WithShortCut(Vcl.Menus.ShortCut({=}VK_OEM_PLUS, [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut({=}VK_OEM_PLUS, [ssCtrl]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnTabOrderSetCurrForm')
@@ -2126,7 +2131,7 @@ begin
                                     .WithDetail('Comment Block')
                                     .WithDescription('Comment block' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Source Templates -> Comment Block')
-                                    .WithShortCut(Vcl.Menus.ShortCut({,}VK_OEM_COMMA, [ssShift, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut({,}VK_OEM_COMMA, [ssShift, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnEditorItem3')
@@ -2147,7 +2152,7 @@ begin
                                     .WithDetail('Comment Block 2')
                                     .WithDescription('Comment block 2' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Source Templates -> Comment Block 2')
-                                    .WithShortCut(Vcl.Menus.ShortCut({.}VK_OEM_PERIOD, [ssShift, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut({.}VK_OEM_PERIOD, [ssShift, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnEditorItem4')
@@ -2231,7 +2236,7 @@ begin
                                     .WithDetail('MSDN Help...')
                                     .WithDescription('Open MSDN help' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> MSDN Help Wizard -> MSDN Help...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_F1, [ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_F1, [ssAlt]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnMsdnWizRunMsdn')
@@ -2252,7 +2257,7 @@ begin
                                     .WithDetail('MSDN Search...')
                                     .WithDescription('Open MSDN Search' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> MSDN Help Wizard -> MSDN Search...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_F1, [ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_F1, [ssShift]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnMsdnWizRunSearch')
@@ -2521,7 +2526,7 @@ begin
                                     .WithDetail('Browse Output Dir...')
                                     .WithDescription('Open Output Directory in Windows Explorer' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Project Enhancements -> Browse Output Dir...')
-                                    .WithShortCut(Vcl.Menus.ShortCut({\}VK_OEM_5, [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut({\}VK_OEM_5, [ssCtrl]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnProjExtExploreExe')
@@ -2542,7 +2547,7 @@ begin
                                     .WithDetail('List Units...')
                                     .WithDescription('Display Units List in Project Group' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Project Enhancements -> List Units...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('U'), [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('U'), [ssCtrl]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnProjExtViewUnits')
@@ -2742,7 +2747,7 @@ begin
                                     .WithDetail('Create a Snapshot...')
                                     .WithDescription('Create a Snapshot of Opened Files' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Historical Files Snapshot -> Create a Snapshot...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('W'), [ssShift, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('W'), [ssShift, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnProjExtFilesSnapshotAdd')
@@ -2784,7 +2789,7 @@ begin
                                     .WithDetail('Open Historical Files...')
                                     .WithDescription('Open Historical Files' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Historical Files Snapshot -> Open Historical Files...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('O'), [ssShift, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('O'), [ssShift, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnProjExtFileReopen')
@@ -2805,7 +2810,7 @@ begin
                                     .WithDetail('Procedure List...')
                                     .WithDescription('List All Procedures and Functions in Current Source File' + System.sLineBreak + System.sLineBreak +
                                                      'Activate: CnPack -> Procedure List...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('D'), [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('D'), [ssCtrl]))
                                     .IsRegistry()
                                     .WithPath('\Software\CnPack\CnWizards\ShortCuts')
                                     .WithKey('CnProcListWizard')

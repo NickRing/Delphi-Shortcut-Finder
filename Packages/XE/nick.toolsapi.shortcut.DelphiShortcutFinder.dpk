@@ -1,7 +1,6 @@
 package nick.toolsapi.shortcut.DelphiShortcutFinder;
 
 {$R *.res}
-{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
 {$ALIGN 8}
 {$ASSERTIONS ON}
 {$BOOLEVAL OFF}
@@ -23,10 +22,8 @@ package nick.toolsapi.shortcut.DelphiShortcutFinder;
 {$WRITEABLECONST OFF}
 {$MINENUMSIZE 1}
 {$IMAGEBASE $400000}
-{$DEFINE DEBUG}
-{$ENDIF IMPLICITBUILDING}
 {$DESCRIPTION 'IDE Shortcut Finder - https://github.com/NickRing/Delphi-Shortcut-Finder'}
-{$LIBSUFFIX 'XE7'}
+{$LIBSUFFIX 'XE'}
 {$IMPLICITBUILD ON}
 
 requires
@@ -43,6 +40,7 @@ contains
   nick.shortcut.core.IShortCutList in '..\..\Source\nick.shortcut.core.IShortCutList.pas',
   nick.shortcut.core.KnownShortcutsRegistration in '..\..\Source\nick.shortcut.core.KnownShortcutsRegistration.pas',
   nick.shortcut.core.SearchRegisteredShortcutsRegistration in '..\..\Source\nick.shortcut.core.SearchRegisteredShortcutsRegistration.pas',
+  nick.shortcut.core.ShortcutExport in '..\..\Source\nick.shortcut.core.ShortcutExport.pas',
   nick.shortcut.core.ShortCutFinderRegistration in '..\..\Source\nick.shortcut.core.ShortCutFinderRegistration.pas',
   nick.shortcut.core.ShortCutItem in '..\..\Source\nick.shortcut.core.ShortCutItem.pas',
   nick.shortcut.core.ShortCutList in '..\..\Source\nick.shortcut.core.ShortCutList.pas',
@@ -67,8 +65,11 @@ contains
   nick.shortcut.element.ParnassusOUBookmarks in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.ParnassusOUBookmarks.pas',
   nick.shortcut.element.SmartInspect in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.SmartInspect.pas',
   nick.shortcut.element.XExPlusPack in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.XExPlusPack.pas',
+  nick.shortcut.export.Csv in '..\..\Source\Exports\nick.shortcut.export.Csv.pas',
+  nick.shortcut.export.Html in '..\..\Source\Exports\nick.shortcut.export.Html.pas',
   nick.shortcut.factory.IRepository in '..\..\Source\Repositories\nick.shortcut.factory.IRepository.pas',
   nick.shortcut.factory.Repository in '..\..\Source\Repositories\nick.shortcut.factory.Repository.pas',
+  nick.shortcut.frame.Base in '..\..\Source\Frames\nick.shortcut.frame.Base.pas' {BaseFrame: TFrame},
   nick.shortcut.frame.KnownShortcuts in '..\..\Source\Frames\nick.shortcut.frame.KnownShortcuts.pas' {frmKnownShortcuts: TFrame},
   nick.shortcut.frame.SearchRegisteredShortcuts in '..\..\Source\Frames\nick.shortcut.frame.SearchRegisteredShortcuts.pas' {frmSearchRegisteredShortcuts: TFrame},
   nick.shortcut.frame.ShortCutKeyAllocation in '..\..\Source\Frames\nick.shortcut.frame.ShortCutKeyAllocation.pas' {frmShortcutKeyAllocation: TFrame},
@@ -87,11 +88,7 @@ contains
   nick.shortcut.repository.System in '..\..\Source\Repositories\nick.shortcut.repository.System.pas',
   nick.shortcut.repository.ToolsApi in '..\..\Source\Repositories\nick.shortcut.repository.ToolsApi.pas',
   nick.shortcut.repository.XmlFile in '..\..\Source\Repositories\nick.shortcut.repository.XmlFile.pas',
-  nick.shortcut.repository.ShortcutExport in '..\..\Source\Repositories\nick.shortcut.repository.ShortcutExport.pas',
-  nick.shortcut.core.ShortcutExport in '..\..\Source\nick.shortcut.core.ShortcutExport.pas',
-  nick.shortcut.export.Csv in '..\..\Source\Exports\nick.shortcut.export.Csv.pas',
-  nick.shortcut.export.Html in '..\..\Source\Exports\nick.shortcut.export.Html.pas',
-  nick.shortcut.frame.Base in '..\..\Source\Frames\nick.shortcut.frame.Base.pas' {BaseFrame: TFrame};
+  nick.shortcut.repository.ShortcutExport in '..\..\Source\Repositories\nick.shortcut.repository.ShortcutExport.pas';
 
 end.
 

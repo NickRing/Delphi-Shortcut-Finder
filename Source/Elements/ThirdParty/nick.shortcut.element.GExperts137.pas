@@ -12,11 +12,18 @@ uses
   nick.shortcut.core.ShortCutItem,
   nick.shortcut.element.DLLExpertBase,
   nick.shortcut.repository.IRegistry,
+  {$IFDEF VER220}
+  SysUtils,
+  IOUtils,
+  Classes,
+  Windows;
+  {$ELSE}
   Vcl.Menus,
   System.SysUtils,
   System.IOUtils,
   System.Classes,
   WinApi.Windows;
+  {$ENDIF}
 
 type
   TGExperts137Element = class(TDLLExpertBaseElement)
@@ -61,7 +68,11 @@ begin
     if (not LRegistryRepository.ValueExists(cCONFIG_PATH)) then
       Exit;
 
+    {$IFDEF VER220}
+    LConfigFileName := SysUtils.IncludeTrailingPathDelimiter(LRegistryRepository.ReadString(cCONFIG_PATH)) + 'MacroTemplates.xml';
+    {$ELSE}
     LConfigFileName := System.SysUtils.IncludeTrailingPathDelimiter(LRegistryRepository.ReadString(cCONFIG_PATH)) + 'MacroTemplates.xml';
+    {$ENDIF}
   finally
     LRegistryRepository.CloseKey;
   end;
@@ -97,7 +108,7 @@ begin
       if (TryStrToInt(LShortCutAttribute.NodeValue, LInteger)) then
         LShortCut := LInteger
       else
-        LShortCut := Vcl.Menus.TextToShortCut(LShortCutAttribute.NodeValue);
+        LShortCut := SystemRepository().TextToShortCut(LShortCutAttribute.NodeValue);
 
       LNameAttribute := LChildNode.FindAttribute('Name');
 
@@ -149,7 +160,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Align Lines')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('Z'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('Z'), [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'Align')
                                     .WithKey(cSHORTCUT)
@@ -164,7 +175,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Change Case')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('C'), [ssShift, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('C'), [ssShift, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'ChangeCase')
                                     .WithKey(cSHORTCUT)
@@ -179,7 +190,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Comment Code')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut({.}VK_OEM_PERIOD, [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut({.}VK_OEM_PERIOD, [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'Comment')
                                     .WithKey(cSHORTCUT)
@@ -194,7 +205,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Uncomment Code')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut({,}VK_OEM_COMMA, [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut({,}VK_OEM_COMMA, [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'UnComment')
                                     .WithKey(cSHORTCUT)
@@ -224,7 +235,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Insert Date/Time')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('A'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('A'), [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'DateTime')
                                     .WithKey(cSHORTCUT)
@@ -239,7 +250,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Move to Matching Delimiter')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_RIGHT, [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_RIGHT, [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'MoveToDelimiter')
                                     .WithKey(cSHORTCUT)
@@ -254,7 +265,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Locate Matching Delimiter')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_LEFT, [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_LEFT, [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'LocateDelimiter')
                                     .WithKey(cSHORTCUT)
@@ -269,7 +280,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Previous Identifier Reference')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_UP, [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_UP, [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'PreviousIdent')
                                     .WithKey(cSHORTCUT)
@@ -284,7 +295,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Next Identifier Reference')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_DOWN, [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_DOWN, [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'NextIdent')
                                     .WithKey(cSHORTCUT)
@@ -299,7 +310,7 @@ begin
   (*ShortCutItemBuilder.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Quote String')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_SINGLEQUOTE, [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_SINGLEQUOTE, [ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'Quote')
                                     .WithKey(cSHORTCUT)
@@ -314,7 +325,7 @@ begin
   (*ShortCutItemBuilder.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Unquote String')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_SINGLEQUOTE, [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_SINGLEQUOTE, [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'Unquote')
                                     .WithKey(cSHORTCUT)
@@ -359,7 +370,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Reverse Statement')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('R'), [ssAlt, ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('R'), [ssAlt, ssShift]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'ReverseStatement')
                                     .WithKey(cSHORTCUT)
@@ -374,7 +385,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Select Identifier')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('I'), [ssShift, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('I'), [ssShift, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'SelectIdent')
                                     .WithKey(cSHORTCUT)
@@ -389,7 +400,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Uses Clause Manager')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('U'), [ssShift, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('U'), [ssShift, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'UsesClauseMgr')
                                     .WithKey(cSHORTCUT)
@@ -404,7 +415,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail(cEDITOR_EXPERT + 'Expand Macro Template')
                                     .WithDescription(AMenuPrefix + 'GExperts -> Configuration... -> [Editor Experts]')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('T'), [ssShift, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('T'), [ssShift, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(ABaseRegistryKey + 'MacroTemplates\Common')
                                     .WithKey(cSHORTCUT)
@@ -529,7 +540,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Grep Search...')
                                     .WithDescription(LMenuPrefix + 'GExperts -> Grep Search...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('S'), [ssAlt, ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('S'), [ssAlt, ssShift]))
                                     .IsRegistry()
                                     .WithPath(LShortCutRegistryKey)
                                     .WithKey('GrepSearch')
@@ -559,7 +570,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Message Dialog...')
                                     .WithDescription(LMenuPrefix + 'GExperts -> Message Dialog...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('D'), [ssCtrl, ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('D'), [ssCtrl, ssShift]))
                                     .IsRegistry()
                                     .WithPath(LShortCutRegistryKey)
                                     .WithKey('MessageDialog')
@@ -574,7 +585,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Procedure List...')
                                     .WithDescription(LMenuPrefix + 'GExperts -> Procedure List...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('G'), [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('G'), [ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(LShortCutRegistryKey)
                                     .WithKey('ProcedureList')
@@ -741,7 +752,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Find Component Reference')
                                     .WithDescription(LMenuPrefix + 'GExperts -> Find Component Reference')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('F'), [ssShift, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('F'), [ssShift, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(LShortCutRegistryKey)
                                     .WithKey('FindComponentReference')
@@ -756,7 +767,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Grep Results')
                                     .WithDescription(LMenuPrefix + 'GExperts -> Grep Results')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('R'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('R'), [ssCtrl, ssAlt]))
                                     .IsRegistry()
                                     .WithPath(LShortCutRegistryKey)
                                     .WithKey('GrepResults')
@@ -786,7 +797,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Macro Library')
                                     .WithDescription(LMenuPrefix + 'GExperts -> Macro Library')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('R'), [ssCtrl, ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('R'), [ssCtrl, ssShift]))
                                     .IsRegistry()
                                     .WithPath(LShortCutRegistryKey)
                                     .WithKey('MacroLibrary')
@@ -831,7 +842,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Perfect Layout')
                                     .WithDescription(LMenuPrefix + 'GExperts -> Perfect Layout')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('L'), [ssCtrl, ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('L'), [ssCtrl, ssShift]))
                                     .IsRegistry()
                                     .WithPath(LShortCutRegistryKey)
                                     .WithKey('PerfectLayout')
@@ -876,7 +887,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Rename Components...')
                                     .WithDescription(LMenuPrefix + 'GExperts -> Rename Components...')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_F2, [ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_F2, [ssShift]))
                                     .IsRegistry()
                                     .WithPath(LShortCutRegistryKey)
                                     .WithKey('RenameComponents')

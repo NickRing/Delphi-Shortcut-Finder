@@ -3,9 +3,15 @@ unit nick.shortcut.frame.Base;
 interface
 
 uses
+  {$IFDEF VER220}
+  Classes,
+  Controls,
+  Forms,
+  {$ELSE}
   System.Classes,
   Vcl.Controls,
   Vcl.Forms,
+  {$ENDIF}
   nick.shortcut.factory.IRepository,
   nick.shortcut.repository.IRegistry;
 
@@ -26,7 +32,11 @@ type
 implementation
 
 uses
+  {$IFDEF VER220}
+  Windows;
+  {$ELSE}
   Winapi.Windows;
+  {$ENDIF}
 
 {$R *.dfm}
 

@@ -31,7 +31,11 @@ uses
   nick.shortcut.repository.Registry,
   nick.shortcut.repository.IniFile,
   nick.shortcut.repository.XmlFile,
+  {$IFDEF VER220}
+  Windows;
+  {$ELSE}
   Winapi.Windows;
+  {$ENDIF}
 
 function TRepositoryFactory.IniFileRepository: IIniFileRepository;
 begin

@@ -3,7 +3,7 @@ unit nick.shortcut.core.ShortCutItem;
 interface
 
 uses
-  System.Classes;
+  nick.shortcut.repository.ISystem;
 
 type
   IShortCutItem = interface
@@ -72,12 +72,12 @@ begin
   Result := FDetails;
 end;
 
-function TShortCutItem.GetPrimary: System.Classes.TShortCut;
+function TShortCutItem.GetPrimary: TShortCut;
 begin
   Result := FPrimary;
 end;
 
-function TShortCutItem.GetSecondary: System.Classes.TShortCut;
+function TShortCutItem.GetSecondary: TShortCut;
 begin
   Result := FSecondary;
 end;

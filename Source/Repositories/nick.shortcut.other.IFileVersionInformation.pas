@@ -3,7 +3,11 @@ unit nick.shortcut.other.IFileVersionInformation;
 interface
 
 uses
+  {$IFDEF VER220}
+  Windows;
+  {$ELSE}
   Winapi.Windows;
+  {$ENDIF}
 
 {$SCOPEDENUMS ON}
 type

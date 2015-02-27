@@ -4,7 +4,11 @@ interface
 
 uses
   nick.shortcut.core.ShortCutList,
+  {$IFDEF VER220}
+  Windows;
+  {$ELSE}
   WinApi.Windows;
+  {$ENDIF}
 
 type
   TDLLExpertBaseElement = class abstract(TShortCutList)
@@ -18,8 +22,7 @@ type
 implementation
 
 uses
-  nick.shortcut.repository.IRegistry,
-  System.IOUtils;
+  nick.shortcut.repository.IRegistry;
 
 function TDLLExpertBaseElement.IsVersionAllowed(const AVSFixedFileInfo: TVSFixedFileInfo): Boolean;
 begin
@@ -45,7 +48,7 @@ begin
   try
     LFilePath := LRegistryRepository.ReadString(AExpertName);
 
-    if not TFile.Exists(LFilePath) then
+    if not RepositoryFactory().SystemRepository().FileExists(LFilePath) then
       Exit;
 
     if not RepositoryFactory().SystemRepository().GetVersionInformation(LFilePath, LVSFixedFileInfo) then

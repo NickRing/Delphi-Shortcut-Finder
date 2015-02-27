@@ -5,11 +5,16 @@ interface
 implementation
 
 uses
-  System.Classes,
   nick.shortcut.core.ShortCutItem,
   nick.shortcut.repository.ShortCut,
   nick.shortcut.core.ShortCutList,
+  {$IFDEF VER220}
+  Classes,
+  Menus;
+  {$ELSE}
+  System.Classes,
   Vcl.Menus;
+  {$ENDIF}
 
 type
   TDelphiMenuElement = class(TShortCutList)

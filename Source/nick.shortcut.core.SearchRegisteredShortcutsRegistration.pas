@@ -8,9 +8,15 @@ implementation
 
 uses
   ToolsApi,
+  {$IFDEF VER220}
+  Forms,
+  SysUtils,
+  Controls,
+  {$ELSE}
   Vcl.Forms,
   System.SysUtils,
   Vcl.Controls,
+  {$ENDIF}
   nick.shortcut.frame.SearchRegisteredShortcuts,
   nick.shortcut.core.ShortCutFinderRegistration,
   nick.shortcut.factory.Repository;
@@ -39,8 +45,13 @@ procedure Register;
 var
   LNTAEnvironmentOptionsServices : INTAEnvironmentOptionsServices;
 begin
+  {$IFDEF VER220}
+  if not SysUtils.Supports(ToolsAPI.BorlandIDEServices, INTAEnvironmentOptionsServices, LNTAEnvironmentOptionsServices) then
+    Exit;
+  {$ELSE}
   if not System.SysUtils.Supports(ToolsAPI.BorlandIDEServices, INTAEnvironmentOptionsServices, LNTAEnvironmentOptionsServices) then
     Exit;
+  {$ENDIF}
 
   FSearchRegisteredShortcutsRegistration := TSearchRegisteredShortcutsRegistration.Create;
   LNTAEnvironmentOptionsServices.RegisterAddInOptions(FSearchRegisteredShortcutsRegistration);
@@ -101,8 +112,13 @@ var
 begin
   if Assigned(FSearchRegisteredShortcutsRegistration) then
   begin
+    {$IFDEF VER220}
+    if not SysUtils.Supports(ToolsAPI.BorlandIDEServices, INTAEnvironmentOptionsServices, LNTAEnvironmentOptionsServices) then
+      Exit;
+    {$ELSE}
     if not System.SysUtils.Supports(ToolsAPI.BorlandIDEServices, INTAEnvironmentOptionsServices, LNTAEnvironmentOptionsServices) then
       Exit;
+    {$ENDIF}
 
     LNTAEnvironmentOptionsServices.UnregisterAddInOptions(FSearchRegisteredShortcutsRegistration);
   end;

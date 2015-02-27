@@ -3,6 +3,17 @@ unit nick.shortcut.frame.SearchRegisteredShortcuts;
 interface
 
 uses
+  {$IFDEF VER220}
+  SysUtils,
+  Messages,
+  StdCtrls,
+  ComCtrls,
+  Controls,
+  Classes,
+  Forms,
+  ActnList,
+  ExtCtrls,
+  {$ELSE}
   System.SysUtils,
   Winapi.Messages,
   Vcl.StdCtrls,
@@ -10,6 +21,10 @@ uses
   Vcl.Controls,
   System.Classes,
   Vcl.Forms,
+  System.Actions,
+  Vcl.ActnList,
+  Vcl.ExtCtrls,
+  {$ENDIF}
   ToolsApi,
   VirtualTrees,
   nick.shortcut.factory.IRepository,
@@ -17,10 +32,7 @@ uses
   nick.shortcut.frame.Base,
   nick.shortcut.core.ShortcutExport,
   nick.shortcut.repository.IToolsApi,
-  nick.shortcut.repository.IRegistry,
-  System.Actions,
-  Vcl.ActnList,
-  Vcl.ExtCtrls;
+  nick.shortcut.repository.IRegistry;
 
 type
   TfrmSearchRegisteredShortcuts = class(TBaseFrame)
@@ -68,10 +80,17 @@ uses
   nick.shortcut.repository.System,
   nick.shortcut.repository.ISystem,
   nick.shortcut.other.VirtualKeys,
+  {$IFDEF VER220}
+  Windows,
+  Menus,
+  Dialogs,
+  IOUtils;
+  {$ELSE}
   Winapi.Windows,
   Vcl.Menus,
   Vcl.Dialogs,
   System.IOUtils;
+  {$ENDIF}
 
 const
   cCOLUMN_REGISTRY_ENTRY_PREFIX = 'Column';
@@ -118,6 +137,7 @@ var
   LShortCut: TShortCut;
   LToolsApiRepository: IToolsApiRepository;
   LModuleDetail: TModuleDetail;
+  lp: Integer;
 begin
   LSystemRepository := RepositoryFactory.SystemRepository;
   LToolsApiRepository := RepositoryFactory.ToolsApiRepository();
@@ -152,8 +172,10 @@ begin
 
       FCurrentShortcutExport.EndHeader(LExportData);
 
-      for LVirtualKeyDetail in TVirtualKeys do
+      for lp := Low(TVirtualKeys) to High(TVirtualKeys) do
       try
+        LVirtualKeyDetail := TVirtualKeys[lp];
+
         if ((LVirtualKeyDetail.CheckedBy * [TCheck.Matrix]) = []) then
           Continue;
 
@@ -170,7 +192,7 @@ begin
 
           LShiftState := LSystemRepository.ModifiersToShiftState(LModifier);
 
-          LShortCut := Vcl.Menus.ShortCut(LVirtualKeyDetail.Value, LShiftState);
+          LShortCut := LSystemRepository.ShortCut(LVirtualKeyDetail.Value, LShiftState);
           LModuleDetailArray := LToolsApiRepository.GetKeyboardBindingsDetails(LShortCut);
           for LModuleDetail in LModuleDetailArray do
           begin

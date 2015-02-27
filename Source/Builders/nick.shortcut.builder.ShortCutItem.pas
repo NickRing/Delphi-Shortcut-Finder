@@ -8,8 +8,7 @@ uses
   nick.shortcut.repository.IRegistry,
   nick.shortcut.repository.IIniFile,
   nick.shortcut.repository.IXmlFile,
-  nick.shortcut.other.INodeXml,
-  System.Classes;
+  nick.shortcut.other.INodeXml;
 
 function NewShortCutItemBuilder(const AShortCutList : IShortCutList) : IShortCutItemBuilder;
 
@@ -17,7 +16,7 @@ implementation
 
 uses
   nick.shortcut.core.ShortCutItem,
-  System.IOUtils;
+  nick.shortcut.repository.ISystem;
 
 const
   cXML_PATH_SEPARATOR = '/';
@@ -714,7 +713,7 @@ begin
   Result := False;
   ASetting := default(T);
 
-  if (not TFile.Exists(AStatus.FileName)) then
+  if (not FShortCutList.SystemRepository.FileExists(AStatus.FileName)) then
     Exit;
 
   LIniFileRepository := FShortCutList.IniFileRepository();
@@ -772,7 +771,7 @@ begin
   Result := False;
   ASetting := default(T);
 
-  if (not TFile.Exists(AStatus.FileName)) then
+  if (not FShortCutList.SystemRepository.FileExists(AStatus.FileName)) then
     Exit;
 
   LXmlFileRepository := FShortCutList.XmlFileRepository();

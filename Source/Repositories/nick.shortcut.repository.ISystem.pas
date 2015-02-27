@@ -3,10 +3,38 @@ unit nick.shortcut.repository.ISystem;
 interface
 
 uses
+  {$IFDEF VER220}
+  TlHelp32,
+  Classes,
+  Windows,
+  {$ELSE}
   Winapi.TlHelp32,
   System.Classes,
   Winapi.Windows,
+  {$ENDIF}
   nick.shortcut.other.IFileVersionInformation;
+
+{$IFDEF VER220}
+type
+  TShortCut = Classes.TShortCut;
+  TShiftState = Classes.TShiftState;
+
+const
+  scShift = Classes.scShift;
+  scCtrl = Classes.scCtrl;
+  scAlt = Classes.scAlt;
+  scNone = Classes.scNone;
+{$ELSE}
+type
+  TShortCut = System.Classes.TShortCut;
+
+const
+  scShift = System.Classes.scShift;
+  scCtrl = System.Classes.scCtrl;
+  scAlt = System.Classes.scAlt;
+  scNone = System.Classes.scNone;
+{$ENDIF}
+
 
 type
   ISystemRepository = interface
@@ -18,6 +46,9 @@ type
     function GetVersionInformation(const AFileName : string) : IFileVersionInformation; overload;
 
     function GetCurrentProcessID() : DWORD;
+
+    function ShortCut(const Key: Word; const Shift: TShiftState): TShortCut;
+    function TextToShortCut(const Text: string): TShortCut;
 
     function CreateToolhelp32Snapshot(const AFlags : DWORD; const AProcessID: DWORD): THandle;
     function Module32First(const ASnapshotHandle: THandle; var AModuleEntry32: TModuleEntry32): BOOL;

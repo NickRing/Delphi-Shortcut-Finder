@@ -5,8 +5,8 @@ interface
 uses
   nick.shortcut.repository.IRegistry,
   nick.shortcut.repository.IIniFile,
-  nick.shortcut.other.INodeXml,
-  System.Classes;
+  nick.shortcut.repository.ISystem,
+  nick.shortcut.other.INodeXml;
 
 type
   TRegistryDecoder<T> = reference to function (const ARegistryRepository : IRegistryRepository; const ASectionKey : string): T;

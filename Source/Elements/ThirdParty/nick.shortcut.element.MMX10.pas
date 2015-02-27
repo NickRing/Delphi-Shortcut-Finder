@@ -5,8 +5,13 @@ interface
 uses
   nick.shortcut.element.DLLExpertBase,
   nick.shortcut.repository.IRegistry,
+  {$IFDEF VER220}
+  Windows,
+  Classes;
+  {$ELSE}
   Winapi.Windows,
   System.Classes;
+  {$ENDIF}
 
 type
   TMMX10Element = class(TDLLExpertBaseElement)
@@ -31,7 +36,11 @@ implementation
 uses
   nick.shortcut.repository.ShortCut,
   nick.shortcut.builder.ShortCutItem,
+  {$IFDEF VER220}
+  SysUtils;
+  {$ELSE}
   System.SysUtils;
+  {$ENDIF}
 
 function TMMX10Element.EnabledDecoder(const ARegistryRepository: IRegistryRepository; const ASectionKey: string): Boolean;
 begin

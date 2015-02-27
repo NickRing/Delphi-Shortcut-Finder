@@ -7,10 +7,15 @@ implementation
 uses
   nick.shortcut.builder.ShortCutItem,
   nick.shortcut.repository.ShortCut,
+  nick.shortcut.element.DLLExpertBase,
+  {$IFDEF VER220}
+  Classes,
+  Windows;
+  {$ELSE}
   Vcl.Menus,
   System.Classes,
-  nick.shortcut.element.DLLExpertBase,
   WinApi.Windows;
+  {$ENDIF}
 
 type
   TParnassusOUBookmarks = class(TDLLExpertBaseElement)
@@ -63,7 +68,7 @@ begin
                                                      'A bookmark will be automatically added at the ' +
                                                      'current line. You will see a small visual ' +
                                                      'animation indicating the location of the new bookmark.')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('B'), [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('B'), [ssCtrl]))
                                     .Build;
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
@@ -72,7 +77,7 @@ begin
                                                      'like normal bookmarks, only one exists per line, so ' +
                                                      'remove one by placing the cursor on the line and pressing ' +
                                                      'Ctrl+Shift+B again.')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('B'), [ssCtrl, ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('B'), [ssCtrl, ssShift]))
                                     .Build;
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
@@ -83,7 +88,7 @@ begin
                                                      'both line and character – and removes the bookmark. You ' +
                                                      'can place an infinite number of temporary bookmarks and ' +
                                                      'press Escape to go back in time to each one.')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_ESCAPE, []))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_ESCAPE, []))
                                     .Build;
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
@@ -95,7 +100,7 @@ begin
                                                      'places a marker where you were. This means that ' +
                                                      'pressing Shift+Escape repeatedly will toggle ' +
                                                      'back and forth between two places.')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_ESCAPE, [ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_ESCAPE, [ssShift]))
                                     .Build;
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
@@ -107,7 +112,7 @@ begin
                                                      'location, not by bookmark number, and are useful ' +
                                                      'if you can’t remember a bookmark number, or if ' +
                                                      'you want to examine each area you tagged.')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_LEFT, [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_LEFT, [ssCtrl, ssAlt]))
                                     .Build;
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
@@ -119,7 +124,7 @@ begin
                                                      'location, not by bookmark number, and are useful ' +
                                                      'if you can’t remember a bookmark number, or if ' +
                                                      'you want to examine each area you tagged.')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_RIGHT, [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_RIGHT, [ssCtrl, ssAlt]))
                                     .Build;
 
   for LChr := '0' to '9' do
@@ -132,7 +137,7 @@ begin
                                                        'current location and it will not be changed. ' +
                                                        'Press the shortcut again quickly to move ' +
                                                        'the bookmark to the current line.')
-                                      .WithShortCut(Vcl.Menus.ShortCut(Ord(LChr), [ssCtrl, ssShift]))
+                                      .WithShortCut(SystemRepository().ShortCut(Ord(LChr), [ssCtrl, ssShift]))
                                       .Build;
 
     nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
@@ -140,7 +145,7 @@ begin
                                       .WithDescription('Move to the specified bookmark. The cursor ' +
                                                        'will be moved to the beginning of that line, ' +
                                                        'and the line made visible onscreen.')
-                                      .WithShortCut(Vcl.Menus.ShortCut(Ord(LChr), [ssCtrl]))
+                                      .WithShortCut(SystemRepository().ShortCut(Ord(LChr), [ssCtrl]))
                                       .Build;
   end;
 end;

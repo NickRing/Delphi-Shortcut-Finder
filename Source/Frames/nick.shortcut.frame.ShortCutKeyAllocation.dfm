@@ -16,10 +16,18 @@ inherited frmShortcutKeyAllocation: TfrmShortcutKeyAllocation
     TabOrder = 0
     object tsKnownShortcuts: TTabSheet
       Caption = '&Known Shortcuts'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     object tsSearchRegisteredShortcuts: TTabSheet
       Caption = '&Search Registered Shortcuts'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
 end

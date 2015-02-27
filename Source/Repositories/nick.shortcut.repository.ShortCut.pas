@@ -5,7 +5,11 @@ interface
 uses
   nick.shortcut.core.ShortCutList,
   nick.shortcut.core.IShortCutList,
+  {$IFDEF VER220}
+  Generics.Collections;
+  {$ELSE}
   System.Generics.Collections;
+  {$ENDIF}
 
 type
   IShortCutRepository = interface
@@ -20,7 +24,11 @@ function GetShortCutRepository() : IShortCutRepository;
 implementation
 
 uses
+  {$IFDEF VER220}
+  SysUtils,
+  {$ELSE}
   System.SysUtils,
+  {$ENDIF}
   nick.shortcut.factory.IRepository,
   nick.shortcut.factory.Repository;
 

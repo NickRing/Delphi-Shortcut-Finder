@@ -3,10 +3,17 @@ unit nick.shortcut.frame.ShortCutKeyAllocation;
 interface
 
 uses
+  {$IFDEF VER220}
+  ComCtrls,
+  Controls,
+  Classes,
+  Forms,
+  {$ELSE}
   Vcl.ComCtrls,
   Vcl.Controls,
   System.Classes,
   Vcl.Forms,
+  {$ENDIF}
   nick.shortcut.factory.IRepository,
   nick.shortcut.repository.IRegistry,
   nick.shortcut.frame.Base;

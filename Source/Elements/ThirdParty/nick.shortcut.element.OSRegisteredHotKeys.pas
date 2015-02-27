@@ -10,11 +10,19 @@ uses
   nick.shortcut.core.ShortCutList,
   nick.shortcut.repository.ISystem,
   nick.shortcut.other.VirtualKeys,
+  {$IFDEF VER220}
+  Windows,
+  Menus,
+  Classes,
+  SysUtils,
+  Consts;
+  {$ELSE}
   Winapi.Windows,
   Vcl.Menus,
   System.Classes,
   System.SysUtils,
   Vcl.Consts;
+  {$ENDIF}
 
 type
   TOSRegisteredHotKeysElement = class(TShortCutList)
@@ -61,7 +69,11 @@ begin
         begin
           LShiftState := LSystemRepository.ModifiersToShiftState(LModifier);
 
+          {$IFDEF VER220}
+          LShortCut := Menus.ShortCut(LVirtualKeyDetail.Value, LShiftState);
+          {$ELSE}
           LShortCut := Vcl.Menus.ShortCut(LVirtualKeyDetail.Value, LShiftState);
+          {$ENDIF}
           LShortCutText := ShortCutToText(LShortCut);
           if (trim(LShortCutText) = EmptyStr) then
           begin

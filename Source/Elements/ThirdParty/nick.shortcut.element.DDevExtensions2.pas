@@ -11,10 +11,17 @@ uses
   nick.shortcut.repository.IRegistry,
   nick.shortcut.other.INodeXml,
   nick.shortcut.element.DLLExpertBase,
+  {$IFDEF VER220}
+  SysUtils,
+  Menus,
+  Classes,
+  Windows;
+  {$ELSE}
   System.SysUtils,
   Vcl.Menus,
   System.Classes,
   WinApi.Windows;
+  {$ENDIF}
 
 type
   TDDevExtensions2Element = class(TDLLExpertBaseElement)
@@ -159,7 +166,7 @@ begin
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Indent text block with Tab')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_TAB, []))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_TAB, []))
                                     .WithActiveState(True)
                                     .IsXMLFile()
                                     .WithFileName(LXmlFileName)
@@ -169,7 +176,7 @@ begin
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Extended Home')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_HOME, []))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_HOME, []))
                                     .WithActiveState(True)
                                     .IsXMLFile()
                                     .WithFileName(LXmlFileName)
@@ -179,7 +186,7 @@ begin
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Extended Ctrl-Left')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_LEFT, [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_LEFT, [ssCtrl]))
                                     .WithActiveState(False)
                                     .IsXMLFile()
                                     .WithFileName(LXmlFileName)
@@ -189,7 +196,7 @@ begin
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Extended Ctrl-Right')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_RIGHT, [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_RIGHT, [ssCtrl]))
                                     .WithActiveState(False)
                                     .IsXMLFile()
                                     .WithFileName(LXmlFileName)
@@ -199,7 +206,7 @@ begin
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Shift-Ctrl-Alt-Up move line/block')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_UP, [ssShift, ssAlt, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_UP, [ssShift, ssAlt, ssCtrl]))
                                     .WithActiveState(True)
                                     .IsXMLFile()
                                     .WithFileName(LXmlFileName)
@@ -209,7 +216,7 @@ begin
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Shift-Ctrl-Alt-Down move line/block')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_DOWN, [ssShift, ssAlt, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_DOWN, [ssShift, ssAlt, ssCtrl]))
                                     .WithActiveState(True)
                                     .IsXMLFile()
                                     .WithFileName(LXmlFileName)
@@ -219,7 +226,7 @@ begin
 
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Find declaration on Ctrl-Alt-PgUp')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_PRIOR, [ssAlt, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_PRIOR, [ssAlt, ssCtrl]))
                                     .WithActiveState(True)
                                     .IsXMLFile()
                                     .WithFileName(LXmlFileName)

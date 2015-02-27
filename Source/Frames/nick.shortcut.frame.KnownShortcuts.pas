@@ -3,6 +3,17 @@ unit nick.shortcut.frame.KnownShortcuts;
 interface
 
 uses
+  {$IFDEF VER220}
+  Messages,
+  SysUtils,
+  Classes,
+  Controls,
+  Forms,
+  StdCtrls,
+  ExtCtrls,
+  ComCtrls,
+  Generics.Collections,
+  {$ELSE}
   Winapi.Messages,
   System.SysUtils,
   System.Classes,
@@ -10,13 +21,14 @@ uses
   Vcl.Forms,
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
-  VirtualTrees,
   Vcl.ComCtrls,
+  System.Generics.Collections,
+  {$ENDIF}
+  VirtualTrees,
   nick.shortcut.core.ShortCutItem,
   nick.shortcut.core.IShortCutList,
   nick.shortcut.repository.ShortCut,
   nick.shortcut.factory.IRepository,
-  System.Generics.Collections,
   nick.shortcut.frame.Base,
   nick.shortcut.repository.IRegistry;
 
@@ -94,6 +106,15 @@ type
 implementation
 
 uses
+  {$IFDEF VER220}
+  RegularExpressions,
+  StrUtils,
+  Menus,
+  Windows,
+  RichEdit,
+  ShellAPI,
+  Generics.Defaults;
+  {$ELSE}
   System.RegularExpressions,
   System.StrUtils,
   Vcl.Menus,
@@ -101,6 +122,7 @@ uses
   Winapi.RichEdit,
   Winapi.ShellAPI,
   System.Generics.Defaults;
+  {$ENDIF}
 
 const
   cCOLUMN_REGISTRY_ENTRY_PREFIX = 'Column';
@@ -274,9 +296,15 @@ begin
                     end);
   end;
 
+  {$IFDEF VER220}
+  LComparison := StrUtils.ContainsText;
+  if chkCaseSensitive.Checked then
+    LComparison := StrUtils.ContainsStr;
+  {$ELSE}
   LComparison := System.StrUtils.ContainsText;
   if chkCaseSensitive.Checked then
     LComparison := System.StrUtils.ContainsStr;
+  {$ENDIF}
 
   AFilterList.Add(function(const AShortCutItem : IShortCutItem) : Boolean
                   begin

@@ -21,7 +21,11 @@ implementation
 
 uses
   XMLDoc,
+  {$IFDEF VER220}
+  SysUtils;
+  {$ELSE}
   System.SysUtils;
+  {$ENDIF}
 
 type
   TNodeXml = class(TInterfacedObject, INodeXml)

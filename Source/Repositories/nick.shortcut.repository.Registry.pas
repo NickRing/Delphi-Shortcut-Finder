@@ -4,7 +4,11 @@ interface
 
 uses
   nick.shortcut.repository.IRegistry,
+  {$IFDEF VER220}
+  Registry;
+  {$ELSE}
   System.Win.Registry;
+  {$ENDIF}
 
 type
   TRegistryRepository = class(TInterfacedObject, IRegistryRepository)
@@ -35,7 +39,11 @@ type
 implementation
 
 uses
+  {$IFDEF VER220}
+  Windows;
+  {$ELSE}
   Winapi.Windows;
+  {$ENDIF}
 
 constructor TRegistryRepository.Create;
 begin

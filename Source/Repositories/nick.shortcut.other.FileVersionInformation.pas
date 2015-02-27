@@ -5,8 +5,13 @@ interface
 uses
   nick.shortcut.other.IFileVersionInformation,
   nick.shortcut.repository.ISystem,
+  {$IFDEF VER220}
+  Generics.Collections,
+  Windows;
+  {$ELSE}
   System.Generics.Collections,
   Winapi.Windows;
+  {$ENDIF}
 
 type
   TFileVersionInformation = class(TInterfacedObject, IFileVersionInformation)
@@ -60,8 +65,13 @@ type
 implementation
 
 uses
+  {$IFDEF VER220}
+  SysUtils,
+  TypInfo;
+  {$ELSE}
   System.SysUtils,
   System.TypInfo;
+  {$ENDIF}
 
 constructor TFileVersionInformation.Create(const AFileName : string; const ASystemRepository : ISystemRepository);
 begin

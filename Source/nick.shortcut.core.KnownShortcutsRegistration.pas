@@ -8,9 +8,15 @@ implementation
 
 uses
   ToolsApi,
+  {$IFDEF VER220}
+  Forms,
+  SysUtils,
+  Controls,
+  {$ELSE}
   Vcl.Forms,
   System.SysUtils,
   Vcl.Controls,
+  {$ENDIF}
   nick.shortcut.frame.KnownShortcuts,
   nick.shortcut.core.ShortCutFinderRegistration,
   nick.shortcut.factory.Repository,
@@ -40,8 +46,13 @@ procedure Register;
 var
   LNTAEnvironmentOptionsServices : INTAEnvironmentOptionsServices;
 begin
+  {$IFDEF VER220}
+  if not SysUtils.Supports(ToolsAPI.BorlandIDEServices, INTAEnvironmentOptionsServices, LNTAEnvironmentOptionsServices) then
+    Exit;
+  {$ELSE}
   if not System.SysUtils.Supports(ToolsAPI.BorlandIDEServices, INTAEnvironmentOptionsServices, LNTAEnvironmentOptionsServices) then
     Exit;
+  {$ENDIF}
 
   FKnownShortcutsRegistration := TKnownShortcutsRegistration.Create;
   LNTAEnvironmentOptionsServices.RegisterAddInOptions(FKnownShortcutsRegistration);
@@ -102,8 +113,13 @@ var
 begin
   if Assigned(FKnownShortcutsRegistration) then
   begin
+    {$IFDEF VER220}
+    if not SysUtils.Supports(ToolsAPI.BorlandIDEServices, INTAEnvironmentOptionsServices, LNTAEnvironmentOptionsServices) then
+      Exit;
+    {$ELSE}
     if not System.SysUtils.Supports(ToolsAPI.BorlandIDEServices, INTAEnvironmentOptionsServices, LNTAEnvironmentOptionsServices) then
       Exit;
+    {$ENDIF}
 
     LNTAEnvironmentOptionsServices.UnregisterAddInOptions(FKnownShortcutsRegistration);
   end;

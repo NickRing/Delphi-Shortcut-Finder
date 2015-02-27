@@ -10,10 +10,17 @@ uses
   nick.shortcut.builder.ShortCutItem,
   nick.shortcut.builder.IShortCutItem,
   nick.shortcut.element.PackageExpertBase,
+  {$IFDEF VER220}
+  SysUtils,
+  Classes,
+//  Menus,
+  Windows;
+  {$ELSE}
   System.SysUtils,
   System.Classes,
   Vcl.Menus,
   WinApi.Windows;
+  {$ENDIF}
 
 type
   TCastalia2014Element = class(TPackageExpertBaseElement)
@@ -106,7 +113,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Template trigger')
                                     .WithDescription('Configuration: Options -> Code templates')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord(' '), []))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord(' '), []))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Code templates:Template trigger')
@@ -121,7 +128,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Drop bookmark hotkey')
                                     .WithDescription('Configuration: Options -> Editor -> Bookmark Stack')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_F2, []))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_F2, []))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Editor.Bookmark Stack:Drop bookmark hotkey')
@@ -131,7 +138,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Pick up bookmark hotkey')
                                     .WithDescription('Configuration: Options -> Editor -> Bookmark Stack')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_ESCAPE, []))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_ESCAPE, []))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Editor.Bookmark Stack:Pick up bookmark hotkey')
@@ -141,7 +148,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Swap bookmark hotkey')
                                     .WithDescription('Configuration: Options -> Editor -> Bookmark Stack')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_ESCAPE, [ssShift]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_ESCAPE, [ssShift]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Editor.Bookmark Stack:Swap bookmark hotkey')
@@ -151,7 +158,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Selection expansion hotkey')
                                     .WithDescription('Configuration: Options -> Editor -> Selection')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('W'), [ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('W'), [ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Editor.Selection:Selection expansion hotkey')
@@ -166,7 +173,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Sync prototypes hotkey')
                                     .WithDescription('Configuration: Options -> Editor -> Sync prototypes')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('S'), [ssShift, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('S'), [ssShift, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Editor.Sync prototypes:Sync prototypes hotkey')
@@ -181,7 +188,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('(Find) Short Cut')
                                     .WithDescription('Configuration: Options -> Editor -> Text search')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('F'), [ssShift, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('F'), [ssShift, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Editor.Text search:Shortcut')
@@ -196,7 +203,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Enable smart surround')
                                     .WithDescription('If enabled, pressing the ( or [ keys with text selected in the code editor will surround that text with (..) or [..], respectively.')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('('), []))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('('), []))
                                     .WithActiveState(True)
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
@@ -207,7 +214,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Enable smart Home key')
                                     .WithDescription('If enabled, pressing the Home key in the code editor will toggle the location of the cursor between the beginning of the line and the beginning of the text on the line (after whitespace).')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_HOME, []))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_HOME, []))
                                     .WithActiveState(True)
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
@@ -220,7 +227,7 @@ begin
                                     .WithDescription('If enabled, pressing the Tab key with text selected in the code editor will indent that text. ' +
                               'Pressing Shift+Tab with text selected will "unindent" the text. The number of spaces to ' +
                               'indent/unindent is determined by the code editor''s "Block Indent" setting.')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_TAB, []))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_TAB, []))
                                     .WithActiveState(True)
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
@@ -231,7 +238,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Enable smart Slash key')
                                     .WithDescription('If enabled, pressing the / key with text selected in the code editor will comment out that text using //-style comments. If the text is already commented out, it will be uncommented.')
-                                    .WithShortCut(Vcl.Menus.ShortCut({/}VK_OEM_2, []))
+                                    .WithShortCut(SystemRepository().ShortCut({/}VK_OEM_2, []))
                                     .WithActiveState(True)
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
@@ -242,7 +249,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Used units')
                                     .WithDescription('Configuration: Options -> Editor -> Navigation tools -> Keyboard shortcuts')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('U'), [ssAlt, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('U'), [ssAlt, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Navigation tools.Keyboard shortcuts')
@@ -252,7 +259,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Used sections')
                                     .WithDescription('Configuration: Options -> Editor -> Navigation tools -> Keyboard shortcuts')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('S'), [ssAlt, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('S'), [ssAlt, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Navigation tools.Keyboard shortcuts:Unit sections')
@@ -262,7 +269,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Class list')
                                     .WithDescription('Configuration: Options -> Editor -> Navigation tools -> Keyboard shortcuts')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('C'), [ssAlt, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('C'), [ssAlt, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Navigation tools.Keyboard shortcuts:Class list')
@@ -272,7 +279,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Procedure list')
                                     .WithDescription('Configuration: Options -> Editor -> Navigation tools -> Keyboard shortcuts')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('P'), [ssAlt, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('P'), [ssAlt, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Navigation tools.Keyboard shortcuts:Procedure list')
@@ -282,7 +289,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Forward bookmark')
                                     .WithDescription('Configuration: Options -> Editor -> Navigation tools -> Keyboard shortcuts')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_RIGHT, [ssAlt, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_RIGHT, [ssAlt, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Navigation tools.Keyboard shortcuts:Forward bookmark')
@@ -292,7 +299,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Backward bookmark')
                                     .WithDescription('Configuration: Options -> Editor -> Navigation tools -> Keyboard shortcuts')
-                                    .WithShortCut(Vcl.Menus.ShortCut(VK_LEFT, [ssAlt, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(VK_LEFT, [ssAlt, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Navigation tools.Keyboard shortcuts:Backward bookmark')
@@ -302,7 +309,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Smart symbol search')
                                     .WithDescription('Configuration: Options -> Editor -> Navigation tools -> Keyboard shortcuts')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('N'), [ssAlt, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('N'), [ssAlt, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Navigation tools.Keyboard shortcuts:Smart symbol search')
@@ -312,7 +319,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Refactoring hotkey')
                                     .WithDescription('Configuration: Options -> Refactoring')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('R'), [ssAlt, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('R'), [ssAlt, ssCtrl]))
                                     .IsRegistry()
                                     .WithPath(cSOFTWARE_TWODESK_CASTALIA_OPTION)
                                     .WithKey('Refactoring:Refactoring hotkey')

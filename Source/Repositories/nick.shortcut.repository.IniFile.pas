@@ -4,7 +4,11 @@ interface
 
 uses
   nick.shortcut.repository.IIniFile,
+  {$IFDEF VER220}
+  IniFiles;
+  {$ELSE}
   System.IniFiles;
+  {$ENDIF}
 
 type
   TIniFileRepository = class(TInterfacedObject, IIniFileRepository)
@@ -22,7 +26,11 @@ type
 implementation
 
 uses
+  {$IFDEF VER220}
+  SysUtils;
+  {$ELSE}
   System.SysUtils;
+  {$ENDIF}
 
 constructor TIniFileRepository.Create;
 begin

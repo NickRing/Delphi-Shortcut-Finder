@@ -5,7 +5,11 @@ interface
 uses
   nick.shortcut.other.VirtualKeys,
   nick.shortcut.factory.IRepository,
+  {$IFDEF VER220}
+  Forms;
+  {$ELSE}
   Vcl.Forms;
+  {$ENDIF}
 
 type
   {$SCOPEDENUMS ON}
@@ -40,7 +44,7 @@ type
   protected
     property RepositoryFactory : IRepositoryFactory read FRepositoryFactory;
   public
-    class function ExportName() : string; virtual; abstract;
+    class function ExportName() : string; virtual;
 
     constructor Create(const ARepositoryFactory : IRepositoryFactory); virtual;
 
@@ -80,6 +84,11 @@ function TShortcutExport.InitialiseExport(const AFileName : string; out AExportD
 begin
   AExportData := nil;
   Result := False;
+end;
+
+class function TShortcutExport.ExportName: string;
+begin
+  Result := '';
 end;
 
 end.

@@ -8,7 +8,11 @@ uses
   nick.shortcut.repository.ShortCut,
   nick.shortcut.builder.ShortCutItem,
   nick.shortcut.element.MMX10,
+  {$IFDEF VER220}
+  Classes;
+  {$ELSE}
   System.Classes;
+  {$ENDIF}
 
 type
   TMMX11Element = class(TMMX10Element)

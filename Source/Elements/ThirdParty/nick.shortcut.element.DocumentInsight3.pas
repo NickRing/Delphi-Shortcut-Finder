@@ -10,9 +10,13 @@ uses
   nick.shortcut.builder.ShortCutItem,
   nick.shortcut.repository.IIniFile,
   nick.shortcut.element.DLLExpertBase,
+  {$IFDEF VER220}
+  Classes,
+  Windows;
+  {$ELSE}
   System.Classes,
-  Vcl.Menus,
   WinApi.Windows;
+  {$ENDIF}
 
 type
   TDocumentInsight3Element = class(TDLLExpertBaseElement)
@@ -65,7 +69,7 @@ begin
                         LHotKeyString: string;
                       begin
                         LHotKeyString := AIniFileRepository.ReadString(ASectionKey, AKey, '');
-                        Result := TextToShortCut(LHotKeyString);
+                        Result := RepositoryFactory().SystemRepository().TextToShortCut(LHotKeyString);
                       end;
 
   LIniFileName := LAppDataDirectory + 'DevJet\DocInsight\3.0\Settings.ini:HotKeys#';
@@ -73,7 +77,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Documentation Inspector')
                                     .WithDescription('Documentation -> Documentation Inspector')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('D'), [ssShift, ssCtrl]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('D'), [ssShift, ssCtrl]))
                                     .IsINIFile()
                                     .WithFIleName(LIniFileName)
                                     .WithSection('HotKeys')
@@ -84,7 +88,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Documentation Explorer')
                                     .WithDescription('Documentation -> Documentation Explorer')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('N'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('N'), [ssCtrl, ssAlt]))
                                     .IsINIFile()
                                     .WithFIleName(LIniFileName)
                                     .WithSection('HotKeys')
@@ -95,7 +99,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Fold Documentation')
                                     .WithDescription('Documentation -> Fold Documentation')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('C'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('C'), [ssCtrl, ssAlt]))
                                     .IsINIFile()
                                     .WithFIleName(LIniFileName)
                                     .WithSection('HotKeys')
@@ -106,7 +110,7 @@ begin
   nick.shortcut.builder.ShortCutItem.NewShortCutItemBuilder(Self)
                                     .WithDetail('Unfold Documentation')
                                     .WithDescription('Documentation -> Unfold Documentation')
-                                    .WithShortCut(Vcl.Menus.ShortCut(Ord('E'), [ssCtrl, ssAlt]))
+                                    .WithShortCut(SystemRepository().ShortCut(Ord('E'), [ssCtrl, ssAlt]))
                                     .IsINIFile()
                                     .WithFIleName(LIniFileName)
                                     .WithSection('HotKeys')

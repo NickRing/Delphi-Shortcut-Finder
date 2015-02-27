@@ -18,7 +18,11 @@ function GetShortcutExportRepository() : IShortcutExportRepository;
 implementation
 
 uses
+  {$IFDEF VER220}
+  Generics.Collections;
+  {$ELSE}
   System.Generics.Collections;
+  {$ENDIF}
 
 var
   LShortcutExportRepository : IShortcutExportRepository = nil;

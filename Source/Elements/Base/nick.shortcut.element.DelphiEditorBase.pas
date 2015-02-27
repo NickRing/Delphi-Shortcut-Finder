@@ -27,8 +27,13 @@ type
 implementation
 
 uses
+  {$IFDEF VER220}
+  SysUtils,
+  Classes,
+  {$ELSE}
   System.SysUtils,
   System.Classes,
+  {$ENDIF}
   nick.shortcut.repository.IRegistry;
 
 function TDelphiEditorBaseElement.GetName: string;
@@ -99,7 +104,11 @@ begin
   try
     LUseCtrlAltKeys := LRegistryRepository.ReadString('Use CtrlAlt Keys');
 
+    {$IFDEF VER220}
+    FCtrlAltKeysInUse := SysUtils.StrToBoolDef(LUseCtrlAltKeys, False);
+    {$ELSE}
     FCtrlAltKeysInUse := System.SysUtils.StrToBoolDef(LUseCtrlAltKeys, False);
+    {$ENDIF}
   finally
     LRegistryRepository.CloseKey;
   end;

@@ -9,7 +9,12 @@ uses
   nick.shortcut.repository.IIniFile,
   nick.shortcut.repository.IRegistry,
   nick.shortcut.repository.IXmlFile,
+  nick.shortcut.repository.ISystem,
+  {$IFDEF VER220}
+  Generics.Collections;
+  {$ELSE}
   System.Generics.Collections;
+  {$ENDIF}
 
 type
   TShortCutListClass = class of TShortCutList;
@@ -21,6 +26,7 @@ type
     FIniFileRepository : IIniFileRepository;
     FRegistryRepository : IRegistryRepository;
     FXmlFileRepository : IXmlFileRepository;
+    FSystemRepository : ISystemRepository;
 
     function GetShortCut(const AIndex : Integer) : IShortCutItem;
   protected
@@ -38,6 +44,7 @@ type
     function IniFileRepository() : IIniFileRepository;
     function XmlFileRepository() : IXmlFileRepository;
     function RegistryRepository() : IRegistryRepository;
+    function SystemRepository() : ISystemRepository;
 
     procedure RetrieveShortCuts();
 
@@ -52,8 +59,13 @@ type
 implementation
 
 uses
+  {$IFDEF VER220}
+  SysUtils,
+  Classes;
+  {$ELSE}
   System.SysUtils,
   System.Classes;
+  {$ENDIF}
 
 constructor TShortCutList.Create(const ARepositoryFactory : IRepositoryFactory);
 begin
@@ -134,6 +146,13 @@ begin
   if (not Assigned(FXmlFileRepository)) or (not FCacheRepositories) then
     FXmlFileRepository := FRepositoryFactory.XmlFileRepository();
   Result := FXmlFileRepository;
+end;
+
+function TShortCutList.SystemRepository: ISystemRepository;
+begin
+  if (not Assigned(FSystemRepository)) or (not FCacheRepositories) then
+    FSystemRepository := FRepositoryFactory.SystemRepository();
+  Result := FSystemRepository;
 end;
 
 end.

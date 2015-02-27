@@ -5,8 +5,11 @@ unit nick.shortcut.repository.ToolsApi;
 interface
 
 uses
-  System.Classes,
+  {$IFDEF VER220}
+  Menus,
+  {$ELSE}
   Vcl.Menus,
+  {$ENDIF}
   ToolsAPI,
   nick.shortcut.repository.IRegistry,
   nick.shortcut.repository.IToolsApi,
@@ -41,9 +44,15 @@ type
 implementation
 
 uses
+  {$IFDEF VER220}
+  SysUtils,
+  TlHelp32,
+  Generics.Collections;
+  {$ELSE}
   System.SysUtils,
   Winapi.TlHelp32,
   System.Generics.Collections;
+  {$ENDIF}
 
 constructor TToolsApiRepository.Create(const ARegistryRepository: IRegistryRepository; const ASystemRepository : ISystemRepository);
 begin
@@ -188,7 +197,11 @@ end;
 
 function TToolsApiRepository.GetKeyboardServices(out AOTAKeyboardServices: IOTAKeyboardServices): Boolean;
 begin
+  {$IFDEF VER220}
+  Result := SysUtils.Supports(ToolsAPI.BorlandIDEServices, IOTAKeyboardServices, AOTAKeyboardServices);
+  {$ELSE}
   Result := System.SysUtils.Supports(ToolsAPI.BorlandIDEServices, IOTAKeyboardServices, AOTAKeyboardServices);
+  {$ENDIF}
 end;
 
 function TToolsApiRepository.GetMainMenu: TMainMenu;
@@ -196,8 +209,13 @@ var
   LNTAServices : INTAServices;
 begin
   Result := nil;
+  {$IFDEF VER220}
+  if not SysUtils.Supports(ToolsAPI.BorlandIDEServices, INTAServices, LNTAServices) then
+    Exit;
+  {$ELSE}
   if not System.SysUtils.Supports(ToolsAPI.BorlandIDEServices, INTAServices, LNTAServices) then
     Exit;
+  {$ENDIF}
 
   Result := LNTAServices.MainMenu;
 end;
@@ -210,8 +228,13 @@ var
 begin
   Result := False;
 
+  {$IFDEF VER220}
+  if not SysUtils.Supports(BorlandIDEServices, IOTAPackageServices, LOTAPackageServices) then
+    Exit;
+  {$ELSE}
   if not System.SysUtils.Supports(BorlandIDEServices, IOTAPackageServices, LOTAPackageServices) then
     Exit;
+  {$ENDIF}
 
   for lp := 0 to LOTAPackageServices.PackageCount - 1 do
   begin
@@ -230,7 +253,11 @@ function TToolsApiRepository.GetBaseRegistryKey(out ABaseRegistryKey: string): B
 var
   LOTAServices: IOTAServices;
 begin
+  {$IFDEF VER220}
+  Result := SysUtils.Supports(BorlandIDEServices, IOTAServices, LOTAServices);
+  {$ELSE}
   Result := System.SysUtils.Supports(BorlandIDEServices, IOTAServices, LOTAServices);
+  {$ENDIF}
 
   if Result then
     ABaseRegistryKey := LOTAServices.GetBaseRegistryKey();

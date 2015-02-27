@@ -3,7 +3,11 @@ unit nick.shortcut.other.VirtualKeys;
 interface
 
 uses
+  {$IFDEF VER220}
+  Windows;
+  {$ELSE}
   Winapi.Windows;
+  {$ENDIF}
 
 type
   {$SCOPEDENUMS ON}

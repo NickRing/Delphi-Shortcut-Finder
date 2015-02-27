@@ -4,8 +4,13 @@ interface
 
 uses
   nick.shortcut.other.IFileVersionInformation,
+  {$IFDEF VER220}
+  Classes,
+  Menus,
+  {$ELSE}
   System.Classes,
   Vcl.Menus,
+  {$ENDIF}
   ToolsAPI;
 
 type
@@ -39,7 +44,11 @@ type
 implementation
 
 uses
+  {$IFDEF VER220}
+  SysUtils;
+  {$ELSE}
   System.SysUtils;
+  {$ENDIF}
 
 { TModuleDetail }
 
@@ -55,3 +64,4 @@ begin
 end;
 
 end.
+
