@@ -1,0 +1,97 @@
+package nick.toolsapi.shortcut.DelphiShortcutFinder;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'IDE Shortcut Finder - https://github.com/NickRing/Delphi-Shortcut-Finder'}
+{$LIBSUFFIX 'XE5'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  designide,
+  VirtualTreesD,
+  IndySystem,
+  IndyProtocols,
+  IndyCore;
+
+contains
+  nick.shortcut.builder.IShortCutItem in '..\..\Source\Builders\nick.shortcut.builder.IShortCutItem.pas',
+  nick.shortcut.builder.ShortCutItem in '..\..\Source\Builders\nick.shortcut.builder.ShortCutItem.pas',
+  nick.shortcut.core.IShortCutList in '..\..\Source\nick.shortcut.core.IShortCutList.pas',
+  nick.shortcut.core.KnownShortcutsRegistration in '..\..\Source\nick.shortcut.core.KnownShortcutsRegistration.pas',
+  nick.shortcut.core.SearchRegisteredShortcutsRegistration in '..\..\Source\nick.shortcut.core.SearchRegisteredShortcutsRegistration.pas',
+  nick.shortcut.core.ShortCutFinderRegistration in '..\..\Source\nick.shortcut.core.ShortCutFinderRegistration.pas',
+  nick.shortcut.core.ShortCutItem in '..\..\Source\nick.shortcut.core.ShortCutItem.pas',
+  nick.shortcut.core.ShortCutList in '..\..\Source\nick.shortcut.core.ShortCutList.pas',
+  nick.shortcut.element.Castalia2014 in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.Castalia2014.pas',
+  nick.shortcut.element.CnWizards in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.CnWizards.pas',
+  nick.shortcut.element.DDevExtensions2 in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.DDevExtensions2.pas',
+  nick.shortcut.element.DelphiEditorBase in '..\..\Source\Elements\Base\nick.shortcut.element.DelphiEditorBase.pas',
+  nick.shortcut.element.DelphiEditorBrief in '..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorBrief.pas',
+  nick.shortcut.element.DelphiEditorClassic in '..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorClassic.pas',
+  nick.shortcut.element.DelphiEditorDefault in '..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorDefault.pas',
+  nick.shortcut.element.DelphiEditorEpsilon in '..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorEpsilon.pas',
+  nick.shortcut.element.DelphiEditorVisualBasic in '..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorVisualBasic.pas',
+  nick.shortcut.element.DelphiEditorVisualStudio in '..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorVisualStudio.pas',
+  nick.shortcut.element.DelphiMenu in '..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiMenu.pas',
+  nick.shortcut.element.DLLExpertBase in '..\..\Source\Elements\Base\nick.shortcut.element.DLLExpertBase.pas',
+  nick.shortcut.element.DocumentInsight3 in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.DocumentInsight3.pas',
+  nick.shortcut.element.GExperts137 in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.GExperts137.pas',
+  nick.shortcut.element.MMX10 in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.MMX10.pas',
+  nick.shortcut.element.MMX11 in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.MMX11.pas',
+  nick.shortcut.element.OSRegisteredHotKeys in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.OSRegisteredHotKeys.pas',
+  nick.shortcut.element.PackageExpertBase in '..\..\Source\Elements\Base\nick.shortcut.element.PackageExpertBase.pas',
+  nick.shortcut.element.ParnassusOUBookmarks in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.ParnassusOUBookmarks.pas',
+  nick.shortcut.element.SmartInspect in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.SmartInspect.pas',
+  nick.shortcut.element.XExPlusPack in '..\..\Source\Elements\ThirdParty\nick.shortcut.element.XExPlusPack.pas',
+  nick.shortcut.factory.IRepository in '..\..\Source\Repositories\nick.shortcut.factory.IRepository.pas',
+  nick.shortcut.factory.Repository in '..\..\Source\Repositories\nick.shortcut.factory.Repository.pas',
+  nick.shortcut.frame.KnownShortcuts in '..\..\Source\Frames\nick.shortcut.frame.KnownShortcuts.pas' {frmKnownShortcuts: TFrame},
+  nick.shortcut.frame.SearchRegisteredShortcuts in '..\..\Source\Frames\nick.shortcut.frame.SearchRegisteredShortcuts.pas' {frmSearchRegisteredShortcuts: TFrame},
+  nick.shortcut.frame.ShortCutKeyAllocation in '..\..\Source\Frames\nick.shortcut.frame.ShortCutKeyAllocation.pas' {frmShortcutKeyAllocation: TFrame},
+  nick.shortcut.other.FileVersionInformation in '..\..\Source\Repositories\nick.shortcut.other.FileVersionInformation.pas',
+  nick.shortcut.other.IFileVersionInformation in '..\..\Source\Repositories\nick.shortcut.other.IFileVersionInformation.pas',
+  nick.shortcut.other.INodeXml in '..\..\Source\Repositories\nick.shortcut.other.INodeXml.pas',
+  nick.shortcut.other.VirtualKeys in '..\..\Source\nick.shortcut.other.VirtualKeys.pas',
+  nick.shortcut.repository.IIniFile in '..\..\Source\Repositories\nick.shortcut.repository.IIniFile.pas',
+  nick.shortcut.repository.IniFile in '..\..\Source\Repositories\nick.shortcut.repository.IniFile.pas',
+  nick.shortcut.repository.IRegistry in '..\..\Source\Repositories\nick.shortcut.repository.IRegistry.pas',
+  nick.shortcut.repository.ISystem in '..\..\Source\Repositories\nick.shortcut.repository.ISystem.pas',
+  nick.shortcut.repository.IToolsApi in '..\..\Source\Repositories\nick.shortcut.repository.IToolsApi.pas',
+  nick.shortcut.repository.IXmlFile in '..\..\Source\Repositories\nick.shortcut.repository.IXmlFile.pas',
+  nick.shortcut.repository.Registry in '..\..\Source\Repositories\nick.shortcut.repository.Registry.pas',
+  nick.shortcut.repository.ShortCut in '..\..\Source\Repositories\nick.shortcut.repository.ShortCut.pas',
+  nick.shortcut.repository.System in '..\..\Source\Repositories\nick.shortcut.repository.System.pas',
+  nick.shortcut.repository.ToolsApi in '..\..\Source\Repositories\nick.shortcut.repository.ToolsApi.pas',
+  nick.shortcut.repository.XmlFile in '..\..\Source\Repositories\nick.shortcut.repository.XmlFile.pas',
+  nick.shortcut.repository.ShortcutExport in '..\..\Source\Repositories\nick.shortcut.repository.ShortcutExport.pas',
+  nick.shortcut.core.ShortcutExport in '..\..\Source\nick.shortcut.core.ShortcutExport.pas',
+  nick.shortcut.export.Csv in '..\..\Source\Exports\nick.shortcut.export.Csv.pas',
+  nick.shortcut.export.Html in '..\..\Source\Exports\nick.shortcut.export.Html.pas',
+  nick.shortcut.frame.Base in '..\..\Source\Frames\nick.shortcut.frame.Base.pas' {BaseFrame: TFrame};
+
+end.
+
