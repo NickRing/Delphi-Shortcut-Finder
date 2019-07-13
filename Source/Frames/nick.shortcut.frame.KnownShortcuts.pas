@@ -140,7 +140,7 @@ begin
   SetLength(FShortCutElements, 0);
 
   vtAssignments.ShowHint := True;
-  vtAssignments.HintAnimation := hatFade;
+//  vtAssignments.HintAnimation := hatFade;
   vtAssignments.HintMode := hmHint;
 
   vtAssignments.Header.Columns.Items[3].Options := vtAssignments.Header.Columns.Items[3].Options - [coVisible];
