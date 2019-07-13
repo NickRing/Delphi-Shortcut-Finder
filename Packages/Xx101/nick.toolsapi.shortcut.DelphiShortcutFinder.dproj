@@ -1,0 +1,216 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0F2ADB59-3B84-46B7-BD5D-2E1DCBD59DA2}</ProjectGuid>
+        <MainSource>nick.toolsapi.shortcut.DelphiShortcutFinder.dpk</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Package</AppType>
+        <FrameworkType>None</FrameworkType>
+        <ProjectVersion>18.2</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Android' and '$(Base)'=='true') or '$(Base_Android)'!=''">
+        <Base_Android>true</Base_Android>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+        <DCC_K>false</DCC_K>
+        <DCC_N>false</DCC_N>
+        <SanitizedProjectName>nick_toolsapi_shortcut_DelphiShortcutFinder</SanitizedProjectName>
+        <DCC_Description>IDE Shortcut Finder - https://github.com/NickRing/Delphi-Shortcut-Finder</DCC_Description>
+        <DCC_E>false</DCC_E>
+        <DCC_UnitSearchPath>..\..\source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <GenPackage>true</GenPackage>
+        <VerInfo_Locale>2057</VerInfo_Locale>
+        <GenDll>true</GenDll>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+        <DesignOnlyPackage>true</DesignOnlyPackage>
+        <DllSuffix>Xx101</DllSuffix>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=;CFBundleName=</VerInfo_Keys>
+        <DCC_F>false</DCC_F>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_S>false</DCC_S>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Android)'!=''">
+        <VerInfo_Keys>package=com.embarcadero.$(MSBuildProjectName);label=$(MSBuildProjectName);versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
+        <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;fmx.dex.jar;google-analytics-v2.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar;google-play-services.dex.jar</EnabledSysJars>
+        <DCC_UsePackage>rtl;IndySystem;IndyProtocols;IndyCore;$(DCC_UsePackage)</DCC_UsePackage>
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(ModuleName)</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_UsePackage>rtl;IndySystem;IndyProtocols;IndyCore;$(DCC_UsePackage)</DCC_UsePackage>
+        <BT_BuildType>Debug</BT_BuildType>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <DCC_UsePackage>rtl;IndySystem;IndyProtocols;IndyCore;$(DCC_UsePackage)</DCC_UsePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_Optimize>false</DCC_Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="rtl.dcp"/>
+        <DCCReference Include="designide.dcp"/>
+        <DCCReference Include="VirtualTreesD.dcp"/>
+        <DCCReference Include="IndySystem.dcp"/>
+        <DCCReference Include="IndyProtocols.dcp"/>
+        <DCCReference Include="IndyCore.dcp"/>
+        <DCCReference Include="..\..\Source\Builders\nick.shortcut.builder.IShortCutItem.pas"/>
+        <DCCReference Include="..\..\Source\Builders\nick.shortcut.builder.ShortCutItem.pas"/>
+        <DCCReference Include="..\..\Source\nick.shortcut.core.IShortCutList.pas"/>
+        <DCCReference Include="..\..\Source\nick.shortcut.core.KnownShortcutsRegistration.pas"/>
+        <DCCReference Include="..\..\Source\nick.shortcut.core.SearchRegisteredShortcutsRegistration.pas"/>
+        <DCCReference Include="..\..\Source\nick.shortcut.core.ShortCutFinderRegistration.pas"/>
+        <DCCReference Include="..\..\Source\nick.shortcut.core.ShortCutItem.pas"/>
+        <DCCReference Include="..\..\Source\nick.shortcut.core.ShortCutList.pas"/>
+        <DCCReference Include="..\..\Source\Elements\ThirdParty\nick.shortcut.element.Castalia2014.pas"/>
+        <DCCReference Include="..\..\Source\Elements\ThirdParty\nick.shortcut.element.CnWizards.pas"/>
+        <DCCReference Include="..\..\Source\Elements\ThirdParty\nick.shortcut.element.DDevExtensions2.pas"/>
+        <DCCReference Include="..\..\Source\Elements\Base\nick.shortcut.element.DelphiEditorBase.pas"/>
+        <DCCReference Include="..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorBrief.pas"/>
+        <DCCReference Include="..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorClassic.pas"/>
+        <DCCReference Include="..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorDefault.pas"/>
+        <DCCReference Include="..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorEpsilon.pas"/>
+        <DCCReference Include="..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorVisualBasic.pas"/>
+        <DCCReference Include="..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiEditorVisualStudio.pas"/>
+        <DCCReference Include="..\..\Source\Elements\Delphi\nick.shortcut.element.DelphiMenu.pas"/>
+        <DCCReference Include="..\..\Source\Elements\Base\nick.shortcut.element.DLLExpertBase.pas"/>
+        <DCCReference Include="..\..\Source\Elements\ThirdParty\nick.shortcut.element.DocumentInsight3.pas"/>
+        <DCCReference Include="..\..\Source\Elements\ThirdParty\nick.shortcut.element.GExperts137.pas"/>
+        <DCCReference Include="..\..\Source\Elements\ThirdParty\nick.shortcut.element.MMX10.pas"/>
+        <DCCReference Include="..\..\Source\Elements\ThirdParty\nick.shortcut.element.MMX11.pas"/>
+        <DCCReference Include="..\..\Source\Elements\ThirdParty\nick.shortcut.element.OSRegisteredHotKeys.pas"/>
+        <DCCReference Include="..\..\Source\Elements\Base\nick.shortcut.element.PackageExpertBase.pas"/>
+        <DCCReference Include="..\..\Source\Elements\ThirdParty\nick.shortcut.element.ParnassusOUBookmarks.pas"/>
+        <DCCReference Include="..\..\Source\Elements\ThirdParty\nick.shortcut.element.SmartInspect.pas"/>
+        <DCCReference Include="..\..\Source\Elements\ThirdParty\nick.shortcut.element.XExPlusPack.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.factory.IRepository.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.factory.Repository.pas"/>
+        <DCCReference Include="..\..\Source\Frames\nick.shortcut.frame.KnownShortcuts.pas">
+            <Form>frmKnownShortcuts</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Frames\nick.shortcut.frame.SearchRegisteredShortcuts.pas">
+            <Form>frmSearchRegisteredShortcuts</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Frames\nick.shortcut.frame.ShortCutKeyAllocation.pas">
+            <Form>frmShortcutKeyAllocation</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.other.FileVersionInformation.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.other.IFileVersionInformation.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.other.INodeXml.pas"/>
+        <DCCReference Include="..\..\Source\nick.shortcut.other.VirtualKeys.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.IIniFile.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.IniFile.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.IRegistry.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.ISystem.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.IToolsApi.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.IXmlFile.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.Registry.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.ShortCut.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.System.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.ToolsApi.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.XmlFile.pas"/>
+        <DCCReference Include="..\..\Source\Repositories\nick.shortcut.repository.ShortcutExport.pas"/>
+        <DCCReference Include="..\..\Source\nick.shortcut.core.ShortcutExport.pas"/>
+        <DCCReference Include="..\..\Source\Exports\nick.shortcut.export.Csv.pas"/>
+        <DCCReference Include="..\..\Source\Exports\nick.shortcut.export.Html.pas"/>
+        <DCCReference Include="..\..\Source\Frames\nick.shortcut.frame.Base.pas">
+            <Form>BaseFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>Package</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">nick.toolsapi.shortcut.DelphiShortcutFinder.dpk</Source>
+                </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\Raize\RC6\Bin\RaizeComponentsVcl_Design240.bpl">File C:\Program Files (x86)\Raize\RC6\Bin\RaizeComponentsVcl_Design240.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\Raize\RC6\Bin\RaizeComponentsVclDb_Design240.bpl">File C:\Program Files (x86)\Raize\RC6\Bin\RaizeComponentsVclDb_Design240.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\Raize\RadiantShapes\Bin\RadiantShapesFmx_Design240.bpl">File C:\Program Files (x86)\Raize\RadiantShapes\Bin\RadiantShapesFmx_Design240.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k240.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp240.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Android">False</Platform>
+                <Platform value="iOSDevice32">False</Platform>
+                <Platform value="iOSSimulator">False</Platform>
+                <Platform value="OSX32">False</Platform>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>
